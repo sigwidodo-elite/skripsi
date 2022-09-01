@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_SKRIPSIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tn_m_area">
+    <Key>
+      <PropertyRef Name="m_area_id" />
+    </Key>
+    <Property Name="m_area_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="m_area_code" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_area_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tn_m_equipment">
+    <Key>
+      <PropertyRef Name="m_equip_id" />
+    </Key>
+    <Property Name="m_equip_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="m_tag_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="m_area" Type="Int32" />
+    <Property Name="m_manufacture" Type="Int32" />
+    <Property Name="m_capacity" Type="Int32" />
+    <Property Name="m_fla" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_rpm" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_volt" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_frame" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tn_m_manufacture" Relationship="Self.FK__tn_m_equi__m_man__2E1BDC42" FromRole="tn_m_equipment" ToRole="tn_m_manufacture" />
+    <Property Name="m_bearing_de" Type="Int32" />
+    <Property Name="m_bearing_nde" Type="Int32" />
+    <Property Name="m_wiring_de" Type="Int32" />
+    <Property Name="m_wiring_nde" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tn_m_manufacture">
+    <Key>
+      <PropertyRef Name="m_manu_id" />
+    </Key>
+    <Property Name="m_manu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="m_manu_code" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_manu_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tn_m_equipment" Relationship="Self.FK__tn_m_equi__m_man__2E1BDC42" FromRole="tn_m_manufacture" ToRole="tn_m_equipment" />
+  </EntityType>
+  <EntityType Name="tn_m_material">
+    <Key>
+      <PropertyRef Name="m_material_id" />
+    </Key>
+    <Property Name="m_material_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="m_substance" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="m_material_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="m_material_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="m_material_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tn_u_login">
+    <Key>
+      <PropertyRef Name="u_id" />
+    </Key>
+    <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="u_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="u_password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="u_role" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tn_users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__tn_m_equi__m_man__2E1BDC42">
+    <End Role="tn_m_manufacture" Type="Self.tn_m_manufacture" Multiplicity="0..1" />
+    <End Role="tn_m_equipment" Type="Self.tn_m_equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tn_m_manufacture">
+        <PropertyRef Name="m_manu_id" />
+      </Principal>
+      <Dependent Role="tn_m_equipment">
+        <PropertyRef Name="m_manufacture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_conn" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tn_m_area" EntityType="Self.tn_m_area" />
+    <EntitySet Name="tn_m_equipment" EntityType="Self.tn_m_equipment" />
+    <EntitySet Name="tn_m_manufacture" EntityType="Self.tn_m_manufacture" />
+    <EntitySet Name="tn_m_material" EntityType="Self.tn_m_material" />
+    <EntitySet Name="tn_u_login" EntityType="Self.tn_u_login" />
+    <EntitySet Name="tn_users" EntityType="Self.tn_users" />
+    <AssociationSet Name="FK__tn_m_equi__m_man__2E1BDC42" Association="Self.FK__tn_m_equi__m_man__2E1BDC42">
+      <End Role="tn_m_manufacture" EntitySet="tn_m_manufacture" />
+      <End Role="tn_m_equipment" EntitySet="tn_m_equipment" />
+    </AssociationSet>
+    <EntitySet Name="tn_m_dropdown" EntityType="DB_SKRIPSIModel.tn_m_dropdown" />
+    <EntitySet Name="V_Equipment" EntityType="DB_SKRIPSIModel.V_Equipment" />
+  </EntityContainer>
+  <EntityType Name="tn_m_dropdown">
+    <Key>
+      <PropertyRef Name="md_id" />
+    </Key>
+    <Property Name="md_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="md_criteria" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="md_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="V_Equipment">
+    <Key>
+      <PropertyRef Name="m_equip_id" />
+    </Key>
+    <Property Name="m_equip_id" Type="Int32" Nullable="false" />
+    <Property Name="m_tag_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="m_area" Type="Int32" />
+    <Property Name="m_manufacture" Type="Int32" />
+    <Property Name="m_capacity" Type="Int32" />
+    <Property Name="m_fla" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_rpm" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_volt" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_frame" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_bearing_de" Type="Int32" />
+    <Property Name="m_bearing_nde" Type="Int32" />
+    <Property Name="m_wiring_de" Type="Int32" />
+    <Property Name="m_wiring_nde" Type="Int32" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <Property Name="m_manu_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="m_area_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

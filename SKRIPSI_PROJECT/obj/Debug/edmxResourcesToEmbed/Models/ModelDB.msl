@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_SKRIPSIModelStoreContainer" CdmEntityContainer="db_conn">
+    <EntitySetMapping Name="tn_m_area">
+      <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_area">
+        <MappingFragment StoreEntitySet="tn_m_area">
+          <ScalarProperty Name="m_area_id" ColumnName="m_area_id" />
+          <ScalarProperty Name="m_area_code" ColumnName="m_area_code" />
+          <ScalarProperty Name="m_area_name" ColumnName="m_area_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tn_m_equipment">
+      <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_equipment">
+        <MappingFragment StoreEntitySet="tn_m_equipment">
+          <ScalarProperty Name="m_wiring_nde" ColumnName="m_wiring_nde" />
+          <ScalarProperty Name="m_wiring_de" ColumnName="m_wiring_de" />
+          <ScalarProperty Name="m_bearing_nde" ColumnName="m_bearing_nde" />
+          <ScalarProperty Name="m_bearing_de" ColumnName="m_bearing_de" />
+          <ScalarProperty Name="m_equip_id" ColumnName="m_equip_id" />
+          <ScalarProperty Name="m_tag_no" ColumnName="m_tag_no" />
+          <ScalarProperty Name="m_area" ColumnName="m_area" />
+          <ScalarProperty Name="m_manufacture" ColumnName="m_manufacture" />
+          <ScalarProperty Name="m_capacity" ColumnName="m_capacity" />
+          <ScalarProperty Name="m_fla" ColumnName="m_fla" />
+          <ScalarProperty Name="m_rpm" ColumnName="m_rpm" />
+          <ScalarProperty Name="m_volt" ColumnName="m_volt" />
+          <ScalarProperty Name="m_frame" ColumnName="m_frame" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tn_m_manufacture">
+      <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_manufacture">
+        <MappingFragment StoreEntitySet="tn_m_manufacture">
+          <ScalarProperty Name="m_manu_id" ColumnName="m_manu_id" />
+          <ScalarProperty Name="m_manu_code" ColumnName="m_manu_code" />
+          <ScalarProperty Name="m_manu_name" ColumnName="m_manu_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tn_m_material">
+      <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_material">
+        <MappingFragment StoreEntitySet="tn_m_material">
+          <ScalarProperty Name="m_material_id" ColumnName="m_material_id" />
+          <ScalarProperty Name="m_substance" ColumnName="m_substance" />
+          <ScalarProperty Name="m_material_type" ColumnName="m_material_type" />
+          <ScalarProperty Name="m_material_code" ColumnName="m_material_code" />
+          <ScalarProperty Name="m_material_name" ColumnName="m_material_name" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tn_u_login">
+      <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_u_login">
+        <MappingFragment StoreEntitySet="tn_u_login">
+          <ScalarProperty Name="u_id" ColumnName="u_id" />
+          <ScalarProperty Name="u_name" ColumnName="u_name" />
+          <ScalarProperty Name="u_password" ColumnName="u_password" />
+          <ScalarProperty Name="u_role" ColumnName="u_role" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tn_users">
+      <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_users">
+        <MappingFragment StoreEntitySet="tn_users">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tn_m_dropdown">
+      <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_dropdown">
+        <MappingFragment StoreEntitySet="tn_m_dropdown">
+          <ScalarProperty Name="md_value" ColumnName="md_value" />
+          <ScalarProperty Name="md_criteria" ColumnName="md_criteria" />
+          <ScalarProperty Name="md_id" ColumnName="md_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_Equipment">
+      <EntityTypeMapping TypeName="DB_SKRIPSIModel.V_Equipment">
+        <MappingFragment StoreEntitySet="V_Equipment">
+          <ScalarProperty Name="m_area_name" ColumnName="m_area_name" />
+          <ScalarProperty Name="m_manu_name" ColumnName="m_manu_name" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="m_wiring_nde" ColumnName="m_wiring_nde" />
+          <ScalarProperty Name="m_wiring_de" ColumnName="m_wiring_de" />
+          <ScalarProperty Name="m_bearing_nde" ColumnName="m_bearing_nde" />
+          <ScalarProperty Name="m_bearing_de" ColumnName="m_bearing_de" />
+          <ScalarProperty Name="m_frame" ColumnName="m_frame" />
+          <ScalarProperty Name="m_volt" ColumnName="m_volt" />
+          <ScalarProperty Name="m_rpm" ColumnName="m_rpm" />
+          <ScalarProperty Name="m_fla" ColumnName="m_fla" />
+          <ScalarProperty Name="m_capacity" ColumnName="m_capacity" />
+          <ScalarProperty Name="m_manufacture" ColumnName="m_manufacture" />
+          <ScalarProperty Name="m_area" ColumnName="m_area" />
+          <ScalarProperty Name="m_tag_no" ColumnName="m_tag_no" />
+          <ScalarProperty Name="m_equip_id" ColumnName="m_equip_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

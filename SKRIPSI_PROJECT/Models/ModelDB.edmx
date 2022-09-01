@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_SKRIPSIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tn_m_area">
+          <Key>
+            <PropertyRef Name="m_area_id" />
+          </Key>
+          <Property Name="m_area_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="m_area_code" Type="varchar" MaxLength="25" />
+          <Property Name="m_area_name" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="varchar" MaxLength="25" />
+          <Property Name="created_by" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tn_m_dropdown">
+          <Key>
+            <PropertyRef Name="md_id" />
+          </Key>
+          <Property Name="md_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="md_criteria" Type="varchar" MaxLength="255" />
+          <Property Name="md_value" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tn_m_equipment">
+          <Key>
+            <PropertyRef Name="m_equip_id" />
+          </Key>
+          <Property Name="m_equip_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="m_tag_no" Type="varchar" MaxLength="50" />
+          <Property Name="m_area" Type="int" />
+          <Property Name="m_manufacture" Type="int" />
+          <Property Name="m_capacity" Type="int" />
+          <Property Name="m_fla" Type="varchar" MaxLength="25" />
+          <Property Name="m_rpm" Type="varchar" MaxLength="25" />
+          <Property Name="m_volt" Type="varchar" MaxLength="25" />
+          <Property Name="m_frame" Type="varchar" MaxLength="25" />
+          <Property Name="m_bearing_de" Type="int" />
+          <Property Name="m_bearing_nde" Type="int" />
+          <Property Name="m_wiring_de" Type="int" />
+          <Property Name="m_wiring_nde" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="25" />
+          <Property Name="created_by" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tn_m_manufacture">
+          <Key>
+            <PropertyRef Name="m_manu_id" />
+          </Key>
+          <Property Name="m_manu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="m_manu_code" Type="varchar" MaxLength="25" />
+          <Property Name="m_manu_name" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="varchar" MaxLength="25" />
+          <Property Name="created_by" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tn_m_material">
+          <Key>
+            <PropertyRef Name="m_material_id" />
+          </Key>
+          <Property Name="m_material_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="m_substance" Type="varchar" MaxLength="255" />
+          <Property Name="m_material_type" Type="varchar" MaxLength="50" />
+          <Property Name="m_material_code" Type="varchar" MaxLength="50" />
+          <Property Name="m_material_name" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="varchar" MaxLength="25" />
+          <Property Name="created_by" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tn_u_login">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="u_name" Type="varchar" MaxLength="255" />
+          <Property Name="u_password" Type="varchar" MaxLength="255" />
+          <Property Name="u_role" Type="varchar" MaxLength="25" />
+          <Property Name="status" Type="varchar" MaxLength="25" />
+          <Property Name="created_by" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tn_users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="255" />
+          <Property Name="role" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_Equipment">
+          <Key>
+            <PropertyRef Name="m_equip_id" />
+          </Key>
+          <Property Name="m_equip_id" Type="int" Nullable="false" />
+          <Property Name="m_tag_no" Type="varchar" MaxLength="50" />
+          <Property Name="m_area" Type="int" />
+          <Property Name="m_manufacture" Type="int" />
+          <Property Name="m_capacity" Type="int" />
+          <Property Name="m_fla" Type="varchar" MaxLength="25" />
+          <Property Name="m_rpm" Type="varchar" MaxLength="25" />
+          <Property Name="m_volt" Type="varchar" MaxLength="25" />
+          <Property Name="m_frame" Type="varchar" MaxLength="25" />
+          <Property Name="m_bearing_de" Type="int" />
+          <Property Name="m_bearing_nde" Type="int" />
+          <Property Name="m_wiring_de" Type="int" />
+          <Property Name="m_wiring_nde" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="25" />
+          <Property Name="created_by" Type="int" />
+          <Property Name="created_date" Type="datetime" />
+          <Property Name="m_manu_name" Type="varchar" MaxLength="255" />
+          <Property Name="m_area_name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__tn_m_equi__m_man__2E1BDC42">
+          <End Role="tn_m_manufacture" Type="Self.tn_m_manufacture" Multiplicity="0..1" />
+          <End Role="tn_m_equipment" Type="Self.tn_m_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tn_m_manufacture">
+              <PropertyRef Name="m_manu_id" />
+            </Principal>
+            <Dependent Role="tn_m_equipment">
+              <PropertyRef Name="m_manufacture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_SKRIPSIModelStoreContainer">
+          <EntitySet Name="tn_m_area" EntityType="Self.tn_m_area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tn_m_dropdown" EntityType="Self.tn_m_dropdown" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tn_m_equipment" EntityType="Self.tn_m_equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tn_m_manufacture" EntityType="Self.tn_m_manufacture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tn_m_material" EntityType="Self.tn_m_material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tn_u_login" EntityType="Self.tn_u_login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tn_users" EntityType="Self.tn_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="V_Equipment" EntityType="Self.V_Equipment" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_Equipment].[m_equip_id] AS [m_equip_id], 
+    [V_Equipment].[m_tag_no] AS [m_tag_no], 
+    [V_Equipment].[m_area] AS [m_area], 
+    [V_Equipment].[m_manufacture] AS [m_manufacture], 
+    [V_Equipment].[m_capacity] AS [m_capacity], 
+    [V_Equipment].[m_fla] AS [m_fla], 
+    [V_Equipment].[m_rpm] AS [m_rpm], 
+    [V_Equipment].[m_volt] AS [m_volt], 
+    [V_Equipment].[m_frame] AS [m_frame], 
+    [V_Equipment].[m_bearing_de] AS [m_bearing_de], 
+    [V_Equipment].[m_bearing_nde] AS [m_bearing_nde], 
+    [V_Equipment].[m_wiring_de] AS [m_wiring_de], 
+    [V_Equipment].[m_wiring_nde] AS [m_wiring_nde], 
+    [V_Equipment].[status] AS [status], 
+    [V_Equipment].[created_by] AS [created_by], 
+    [V_Equipment].[created_date] AS [created_date], 
+    [V_Equipment].[m_manu_name] AS [m_manu_name], 
+    [V_Equipment].[m_area_name] AS [m_area_name]
+    FROM [dbo].[V_Equipment] AS [V_Equipment]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tn_m_equi__m_man__2E1BDC42" Association="Self.FK__tn_m_equi__m_man__2E1BDC42">
+            <End Role="tn_m_manufacture" EntitySet="tn_m_manufacture" />
+            <End Role="tn_m_equipment" EntitySet="tn_m_equipment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_SKRIPSIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tn_m_area">
+          <Key>
+            <PropertyRef Name="m_area_id" />
+          </Key>
+          <Property Name="m_area_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="m_area_code" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_area_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tn_m_equipment">
+          <Key>
+            <PropertyRef Name="m_equip_id" />
+          </Key>
+          <Property Name="m_equip_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="m_tag_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="m_area" Type="Int32" />
+          <Property Name="m_manufacture" Type="Int32" />
+          <Property Name="m_capacity" Type="Int32" />
+          <Property Name="m_fla" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_rpm" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_volt" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_frame" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tn_m_manufacture" Relationship="Self.FK__tn_m_equi__m_man__2E1BDC42" FromRole="tn_m_equipment" ToRole="tn_m_manufacture" />
+          <Property Name="m_bearing_de" Type="Int32" />
+          <Property Name="m_bearing_nde" Type="Int32" />
+          <Property Name="m_wiring_de" Type="Int32" />
+          <Property Name="m_wiring_nde" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tn_m_manufacture">
+          <Key>
+            <PropertyRef Name="m_manu_id" />
+          </Key>
+          <Property Name="m_manu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="m_manu_code" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_manu_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tn_m_equipment" Relationship="Self.FK__tn_m_equi__m_man__2E1BDC42" FromRole="tn_m_manufacture" ToRole="tn_m_equipment" />
+        </EntityType>
+        <EntityType Name="tn_m_material">
+          <Key>
+            <PropertyRef Name="m_material_id" />
+          </Key>
+          <Property Name="m_material_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="m_substance" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="m_material_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="m_material_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="m_material_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tn_u_login">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="u_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="u_password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="u_role" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tn_users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__tn_m_equi__m_man__2E1BDC42">
+          <End Role="tn_m_manufacture" Type="Self.tn_m_manufacture" Multiplicity="0..1" />
+          <End Role="tn_m_equipment" Type="Self.tn_m_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tn_m_manufacture">
+              <PropertyRef Name="m_manu_id" />
+            </Principal>
+            <Dependent Role="tn_m_equipment">
+              <PropertyRef Name="m_manufacture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_conn" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tn_m_area" EntityType="Self.tn_m_area" />
+          <EntitySet Name="tn_m_equipment" EntityType="Self.tn_m_equipment" />
+          <EntitySet Name="tn_m_manufacture" EntityType="Self.tn_m_manufacture" />
+          <EntitySet Name="tn_m_material" EntityType="Self.tn_m_material" />
+          <EntitySet Name="tn_u_login" EntityType="Self.tn_u_login" />
+          <EntitySet Name="tn_users" EntityType="Self.tn_users" />
+          <AssociationSet Name="FK__tn_m_equi__m_man__2E1BDC42" Association="Self.FK__tn_m_equi__m_man__2E1BDC42">
+            <End Role="tn_m_manufacture" EntitySet="tn_m_manufacture" />
+            <End Role="tn_m_equipment" EntitySet="tn_m_equipment" />
+          </AssociationSet>
+          <EntitySet Name="tn_m_dropdown" EntityType="DB_SKRIPSIModel.tn_m_dropdown" />
+          <EntitySet Name="V_Equipment" EntityType="DB_SKRIPSIModel.V_Equipment" />
+        </EntityContainer>
+        <EntityType Name="tn_m_dropdown">
+          <Key>
+            <PropertyRef Name="md_id" />
+          </Key>
+          <Property Name="md_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="md_criteria" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="md_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="V_Equipment">
+          <Key>
+            <PropertyRef Name="m_equip_id" />
+          </Key>
+          <Property Name="m_equip_id" Type="Int32" Nullable="false" />
+          <Property Name="m_tag_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="m_area" Type="Int32" />
+          <Property Name="m_manufacture" Type="Int32" />
+          <Property Name="m_capacity" Type="Int32" />
+          <Property Name="m_fla" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_rpm" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_volt" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_frame" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_bearing_de" Type="Int32" />
+          <Property Name="m_bearing_nde" Type="Int32" />
+          <Property Name="m_wiring_de" Type="Int32" />
+          <Property Name="m_wiring_nde" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="m_manu_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="m_area_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_SKRIPSIModelStoreContainer" CdmEntityContainer="db_conn">
+          <EntitySetMapping Name="tn_m_area">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_area">
+              <MappingFragment StoreEntitySet="tn_m_area">
+                <ScalarProperty Name="m_area_id" ColumnName="m_area_id" />
+                <ScalarProperty Name="m_area_code" ColumnName="m_area_code" />
+                <ScalarProperty Name="m_area_name" ColumnName="m_area_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tn_m_equipment">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_equipment">
+              <MappingFragment StoreEntitySet="tn_m_equipment">
+                <ScalarProperty Name="m_wiring_nde" ColumnName="m_wiring_nde" />
+                <ScalarProperty Name="m_wiring_de" ColumnName="m_wiring_de" />
+                <ScalarProperty Name="m_bearing_nde" ColumnName="m_bearing_nde" />
+                <ScalarProperty Name="m_bearing_de" ColumnName="m_bearing_de" />
+                <ScalarProperty Name="m_equip_id" ColumnName="m_equip_id" />
+                <ScalarProperty Name="m_tag_no" ColumnName="m_tag_no" />
+                <ScalarProperty Name="m_area" ColumnName="m_area" />
+                <ScalarProperty Name="m_manufacture" ColumnName="m_manufacture" />
+                <ScalarProperty Name="m_capacity" ColumnName="m_capacity" />
+                <ScalarProperty Name="m_fla" ColumnName="m_fla" />
+                <ScalarProperty Name="m_rpm" ColumnName="m_rpm" />
+                <ScalarProperty Name="m_volt" ColumnName="m_volt" />
+                <ScalarProperty Name="m_frame" ColumnName="m_frame" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tn_m_manufacture">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_manufacture">
+              <MappingFragment StoreEntitySet="tn_m_manufacture">
+                <ScalarProperty Name="m_manu_id" ColumnName="m_manu_id" />
+                <ScalarProperty Name="m_manu_code" ColumnName="m_manu_code" />
+                <ScalarProperty Name="m_manu_name" ColumnName="m_manu_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tn_m_material">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_material">
+              <MappingFragment StoreEntitySet="tn_m_material">
+                <ScalarProperty Name="m_material_id" ColumnName="m_material_id" />
+                <ScalarProperty Name="m_substance" ColumnName="m_substance" />
+                <ScalarProperty Name="m_material_type" ColumnName="m_material_type" />
+                <ScalarProperty Name="m_material_code" ColumnName="m_material_code" />
+                <ScalarProperty Name="m_material_name" ColumnName="m_material_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tn_u_login">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_u_login">
+              <MappingFragment StoreEntitySet="tn_u_login">
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="u_name" ColumnName="u_name" />
+                <ScalarProperty Name="u_password" ColumnName="u_password" />
+                <ScalarProperty Name="u_role" ColumnName="u_role" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tn_users">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_users">
+              <MappingFragment StoreEntitySet="tn_users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tn_m_dropdown">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_dropdown">
+              <MappingFragment StoreEntitySet="tn_m_dropdown">
+                <ScalarProperty Name="md_value" ColumnName="md_value" />
+                <ScalarProperty Name="md_criteria" ColumnName="md_criteria" />
+                <ScalarProperty Name="md_id" ColumnName="md_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_Equipment">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.V_Equipment">
+              <MappingFragment StoreEntitySet="V_Equipment">
+                <ScalarProperty Name="m_area_name" ColumnName="m_area_name" />
+                <ScalarProperty Name="m_manu_name" ColumnName="m_manu_name" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="m_wiring_nde" ColumnName="m_wiring_nde" />
+                <ScalarProperty Name="m_wiring_de" ColumnName="m_wiring_de" />
+                <ScalarProperty Name="m_bearing_nde" ColumnName="m_bearing_nde" />
+                <ScalarProperty Name="m_bearing_de" ColumnName="m_bearing_de" />
+                <ScalarProperty Name="m_frame" ColumnName="m_frame" />
+                <ScalarProperty Name="m_volt" ColumnName="m_volt" />
+                <ScalarProperty Name="m_rpm" ColumnName="m_rpm" />
+                <ScalarProperty Name="m_fla" ColumnName="m_fla" />
+                <ScalarProperty Name="m_capacity" ColumnName="m_capacity" />
+                <ScalarProperty Name="m_manufacture" ColumnName="m_manufacture" />
+                <ScalarProperty Name="m_area" ColumnName="m_area" />
+                <ScalarProperty Name="m_tag_no" ColumnName="m_tag_no" />
+                <ScalarProperty Name="m_equip_id" ColumnName="m_equip_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

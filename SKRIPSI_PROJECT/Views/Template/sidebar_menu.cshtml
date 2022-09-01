@@ -1,0 +1,95 @@
+﻿
+
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+    <!-- BEGIN SIDEBAR -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+        <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+        <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+        <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <!-- PORTLET MAIN -->
+        <div class="portlet light profile-sidebar-portlet">
+            <!-- SIDEBAR USERPIC -->
+            <div class="profile-userpic">
+                <img src="" class="img-responsive" alt="">
+            </div>
+            <!-- END SIDEBAR USERPIC -->
+            <!-- SIDEBAR USER TITLE -->
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name"> </div>
+                <div class="profile-usertitle-job" style="font-size:10px;"> </div>
+            </div>
+            <!-- END SIDEBAR USER TITLE -->
+        </div>
+        <hr />
+        <!-- END PORTLET MAIN -->
+        <ul class="page-sidebar-menu " id="menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <li class="nav-item start" id="employee-menu">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <span class="title font-dark">Data Peralatan</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item" id="reg-employee-menu">
+                        <a href="/master/equipment" class="nav-link ">
+                            <span class="title font-dark">Input Data Peralatan</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item start" id="employee-menu">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <span class="title font-dark">Data Perbaikan Alat</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item" id="reg-employee-menu">
+                        <a href="/employee/register" class="nav-link ">
+                            <span class="title font-dark">Input Data Perbaikan</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item start" id="employee-menu">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <span class="title font-dark">Data Master</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item" id="reg-employee-menu">
+                        <a href="/master/area" class="nav-link ">
+                            <span class="title font-dark">Data Area</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="reg-employee-menu">
+                        <a href="/master/manufacture" class="nav-link ">
+                            <span class="title font-dark">Data Manufacture</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="reg-employee-menu">
+                        <a href="/master/material" class="nav-link ">
+                            <span class="title font-dark">Data Material</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+    <!-- END SIDEBAR -->
+</div>
+<!-- END SIDEBAR -->
