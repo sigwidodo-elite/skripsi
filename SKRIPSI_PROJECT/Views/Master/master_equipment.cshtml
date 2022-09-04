@@ -683,7 +683,7 @@
                 success: function (result) {
                     $('#txtDe').html('<option value="">- Pilih DE -</option>');
                     $.each(result, function (i) {
-                        $('#txtDe').append('<option value=' + this.md_id + '>' + this.md_value + '</option>');
+                        $('#txtDe').append('<option value=' + this.m_material_id + '>' + this.m_material_name + '</option>');
                     });
                 },
                 error: function (e) {
@@ -699,7 +699,7 @@
                 success: function (result) {
                     $('#txtNde').html('<option value="">- Pilih Frame -</option>');
                     $.each(result, function (i) {
-                        $('#txtNde').append('<option value=' + this.md_id + '>' + this.md_value + '</option>');
+                        $('#txtNde').append('<option value=' + this.m_material_id + '>' + this.m_material_name + '</option>');
                     });
                 },
                 error: function (e) {
@@ -715,7 +715,7 @@
                 success: function (result) {
                     $('#txtWiring').html('<option value="">- Pilih Frame -</option>');
                     $.each(result, function (i) {
-                        $('#txtWiring').append('<option value=' + this.md_id + '>' + this.md_value + '</option>');
+                        $('#txtWiring').append('<option value=' + this.m_material_id + '>' + this.m_material_name + '</option>');
                     });
                 },
                 error: function (e) {

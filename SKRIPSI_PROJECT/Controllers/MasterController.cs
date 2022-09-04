@@ -356,7 +356,7 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetListDE()
         {
 
-            List<tn_m_dropdown> list = masterRepository.GetListDE();
+            List<tn_m_material> list = masterRepository.GetListDE();
             var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
@@ -367,7 +367,7 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetListNDE()
         {
 
-            List<tn_m_dropdown> list = masterRepository.GetListDE();
+            List<tn_m_material> list = masterRepository.GetListDE();
             var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
@@ -378,7 +378,7 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetListWiring()
         {
 
-            List<tn_m_dropdown> list = masterRepository.GetListWiring();
+            List<tn_m_material> list = masterRepository.GetListWiring();
             var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;

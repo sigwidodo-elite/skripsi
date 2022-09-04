@@ -63,35 +63,49 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="txtmaterialid" class="form-control" />
+                @*<div class="row" style="margin-bottom: -5px;">
+            <div class="form-group">
+                <label class="control-label col-md-3">Kode Material<span class="required"> * </span></label>
+                <div class="col-md-9" style="padding-right: 40px; !important;">
+                    <input type="text" id="txtkodematerial" placeholder="Kode Material" maxlength="100" name="material" class="form-control" />
+                </div>
+            </div>
+        </div>*@
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Kode Material<span class="required"> * </span></label>
+                        <label class="control-label col-md-3">Jenis Material<span class="required"> * </span></label>
                         <div class="col-md-9" style="padding-right: 40px; !important;">
-                            <input type="text" id="txtkodematerial" placeholder="Kode Material" maxlength="100" name="material" class="form-control" />
+                            <label class="mt-radio" style="padding-right: 10px; !important;">
+                                <input type="radio" name="materialType" value="BEARING" class="radio-material" /> Bearing
+                                <span></span>
+                            </label>
+                            <label class="mt-radio">
+                                <input type="radio" name="materialType" value="WIRING" class="radio-material" checked /> Wiring
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row bearing" style="margin-bottom: -5px;">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Tipe Bearing<span class="required"> * </span></label>
+                        <div class="col-md-9" style="padding-right: 40px; !important;">
+                            <label class="mt-radio" style="padding-right: 10px; !important;">
+                                <input type="radio" name="bearingType" value="DE" class="radio-bearing-type" /> DE
+                                <span></span>
+                            </label>
+                            <label class="mt-radio">
+                                <input type="radio" name="bearingType" value="NDE" class="radio-bearing-type" checked /> NDE
+                                <span></span>
+                            </label>
                         </div>
                     </div>
                 </div>
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Nama Material<span class="required"> * </span></label>
+                        <label class="control-label col-md-3">Diameter<span class="required"> * </span></label>
                         <div class="col-md-9" style="padding-right: 40px; !important;">
-                            <input type="text" id="txtnamamaterial" placeholder="Nama Material" maxlength="100" name="material" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: -5px;">
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Tipe Material<span class="required"> * </span></label>
-                        <div class="col-md-9" style="padding-right: 40px; !important;">
-                            <input type="text" id="txttipematerial" placeholder="Tipe Material" maxlength="100" name="material" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: -5px;">
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Bahan Material<span class="required"> * </span></label>
-                        <div class="col-md-9" style="padding-right: 40px; !important;">
-                            <input type="text" id="txtsubstancematerial" placeholder="Bahan Material" maxlength="100" name="material" class="form-control" />
+                            <input type="text" id="txtnamamaterial" maxlength="100" name="material" class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -162,6 +176,16 @@
             $('.has-success').removeClass('has-success');
             $('.fa-check').removeClass('fa-check');
             $('.alert-danger').hide();
+            var tkStatus = $("input[name='materialType']:checked").val();
+
+            if (tkStatus == 'BEARING') {
+                $('.bearing').show();
+                $('#txtnamamaterial').parent().siblings().eq(0).text('Nama Bearing')
+            } else {
+                $('.bearing').hide();
+                $('#txtnamamaterial').parent().siblings().eq(0).text('Diameter')
+            }
+
             $('#modal-master-material').modal('show');
 
         });
@@ -170,11 +194,16 @@
         /* SAVE MASTER material */
         function savematerial() {
 
+            var substance = $("input[name='materialType']:checked").val();
+            var typeBearing = $("input[name='bearingType']:checked").val();
+
             var materi = new FormData();
-            materi.append('m_material_code', $('#txtkodematerial').val());
+            materi.append('m_material_code', $('#txtnamamaterial').val());
             materi.append('m_material_name', $('#txtnamamaterial').val());
-            materi.append('m_material_type', $('#txttipematerial').val());
-            materi.append('m_substance', $('#txtsubstancematerial').val());
+            materi.append('m_substance', substance);
+            if (substance == 'BEARING') {
+                materi.append('m_material_type', typeBearing);
+            }
             materi.append('status', 'ACTIVE');
             materi.append("m_material_id", $('#txtmaterialid').val());
 
@@ -435,6 +464,24 @@
                 }
             });
         }
+
+        $('.bearing').hide();
+        $('.wiring').hide();
+
+        /* change status bpjs ketenagakerjaan */
+        $(document).on("click", ".radio-material", function (e) {
+
+            var tkStatus = $("input[name='materialType']:checked").val();
+
+            if (tkStatus == 'BEARING') {
+                $('.bearing').show();
+                $('#txtnamamaterial').parent().siblings().eq(0).text('Nama Bearing')
+            } else {
+                $('.bearing').hide();
+                $('#txtnamamaterial').parent().siblings().eq(0).text('Diameter')
+            }
+
+        });
 
     });
 </script>

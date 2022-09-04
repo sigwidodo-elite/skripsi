@@ -368,14 +368,14 @@ namespace SKRIPSI_PROJECT.Repository
             return list;
         }
 
-        public List<tn_m_dropdown> GetListWiring()
+        public List<tn_m_material> GetListWiring()
         {
 
-            List<tn_m_dropdown> list = new List<tn_m_dropdown>();
+            List<tn_m_material> list = new List<tn_m_material>();
             try
             {
                 _conn = new db_conn();
-                list = _conn.tn_m_dropdown.Where(m => m.md_criteria == "WIRING").ToList();
+                list = _conn.tn_m_material.Where(m => m.m_substance == "WIRING").ToList();
             }
             catch (SqlException e)
             {
@@ -440,14 +440,14 @@ namespace SKRIPSI_PROJECT.Repository
             return list;
         }
 
-        public List<tn_m_dropdown> GetListDE()
+        public List<tn_m_material> GetListDE()
         {
 
-            List<tn_m_dropdown> list = new List<tn_m_dropdown>();
+            List<tn_m_material> list = new List<tn_m_material>();
             try
             {
                 _conn = new db_conn();
-                list = _conn.tn_m_dropdown.Where(m => m.md_criteria == "DE").ToList();
+                list = _conn.tn_m_material.Where(m => m.m_substance == "BEARING" && m.m_material_type == "DE").ToList();
             }
             catch (SqlException e)
             {
@@ -458,14 +458,14 @@ namespace SKRIPSI_PROJECT.Repository
             return list;
         }
 
-        public List<tn_m_dropdown> GetListNDE()
+        public List<tn_m_material> GetListNDE()
         {
 
-            List<tn_m_dropdown> list = new List<tn_m_dropdown>();
+            List<tn_m_material> list = new List<tn_m_material>();
             try
             {
                 _conn = new db_conn();
-                list = _conn.tn_m_dropdown.Where(m => m.md_criteria == "NDE").ToList();
+                list = _conn.tn_m_material.Where(m => m.m_substance == "BEARING" && m.m_material_type == "NDE").ToList();
             }
             catch (SqlException e)
             {
@@ -510,6 +510,52 @@ namespace SKRIPSI_PROJECT.Repository
             }
 
             return list;
+        }
+        public bool SaveEquipment(tn_m_equipment equipment)
+        {
+
+            try
+            {
+                _conn = new db_conn();
+                if (equipment.m_equip_id == 0)
+                {
+                    equipment.created_date = DateTime.Now;
+                    _conn.tn_m_equipment.Add(equipment);
+                    _conn.SaveChanges();
+                }
+                else
+                {
+                    //tn_m_equipment eq = _conn.tn_m_equipment.Single(m => m.m_equip_id == equipment.m_equip_id);
+                    //_conn.tn_m_equipment.Attach(eq);
+                    //eq.m_area = equipment.m_area;
+                    //eq.m_bearing_de = equipment.m_bearing_de;
+                    //eq.m_bearing_nde = equipment.m_bearing_nde;
+                    //eq.m_capacity = equipment.m_capacity;
+                    //eq.m_fla = equipment.m_fla;
+                    //eq.m_frame = equipment.m_frame;
+                    //eq.m_manufacture = equipment.m_manufacture;
+                    //eq.m_rpm = equipment.m_rpm;
+                    //eq.m_tag_no = equipment.m_tag_no;
+                    //eq.m_volt = equipment.m_volt;
+                    //eq.m_wiring_de = 
+                    //mat.m_material_name = materi.m_material_name;
+                    //mat.m_material_type = materi.m_material_type;
+                    //mat.m_substance = materi.m_substance;
+                    //_conn.SaveChanges();
+                }
+
+            }
+            catch (SqlException e)
+            {
+
+                Console.WriteLine(e);
+                return false;
+                throw;
+
+            }
+
+            return true;
+
         }
     }
 }
