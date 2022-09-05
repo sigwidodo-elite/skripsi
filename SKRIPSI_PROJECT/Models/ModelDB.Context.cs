@@ -27,11 +27,11 @@ namespace SKRIPSI_PROJECT.Models
     
         public virtual DbSet<tn_m_area> tn_m_area { get; set; }
         public virtual DbSet<tn_m_equipment> tn_m_equipment { get; set; }
-        public virtual DbSet<tn_m_manufacture> tn_m_manufacture { get; set; }
         public virtual DbSet<tn_m_material> tn_m_material { get; set; }
         public virtual DbSet<tn_u_login> tn_u_login { get; set; }
         public virtual DbSet<tn_users> tn_users { get; set; }
         public virtual DbSet<tn_m_dropdown> tn_m_dropdown { get; set; }
         public virtual DbSet<V_Equipment> V_Equipment { get; set; }
+        public virtual DbSet<tn_m_manufacture> tn_m_manufacture { get; set; }
     }
 }

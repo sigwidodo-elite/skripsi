@@ -30,7 +30,5 @@ namespace SKRIPSI_PROJECT.Models
         public Nullable<int> m_bearing_nde { get; set; }
         public Nullable<int> m_wiring_de { get; set; }
         public Nullable<int> m_wiring_nde { get; set; }
-    
-        public virtual tn_m_manufacture tn_m_manufacture { get; set; }
     }
 }

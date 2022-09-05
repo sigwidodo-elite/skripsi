@@ -31,12 +31,12 @@
                         <div class="portlet-body">
                             <table class="table table-striped table-hover table-bordered" id="table_equipment">
                                 <thead>
-                                    <tr class="bg-red-thunderbird bg-font-red-thunderbird">
+                                    <tr class="bg-red-thunderbird bg-font-red-thunderbird" style="text-align:center">
                                         <th rowspan="2" style="display:none;"> id </th>
                                         <th rowspan="2"> TAG NUMBER </th>
                                         <th rowspan="2"> AREA </th>
-                                        <th colspan="6"> SPESIFIKASI </th>
-                                        <th colspan="2"> MATERIAL </th>
+                                        <th colspan="6" style="text-align:center" > SPESIFIKASI </th>
+                                        <th colspan="3" style="text-align:center"> MATERIAL </th>
                                         <th rowspan="2" width="10%"> ACTION</th>
                                     </tr>
                                     <tr class="bg-red-thunderbird bg-font-red-thunderbird">
@@ -44,10 +44,11 @@
                                         <th> CAPACITY </th>
                                         <th> FLA </th>
                                         <th> RPM </th>
-                                        <th> FLOT </th>
+                                        <th> VOLT </th>
                                         <th> FRAME </th>
                                         <th> DE </th>
                                         <th> NDE </th>
+                                        <th> WIRING </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -231,10 +232,17 @@
                 "sAjaxDataProp": "",
                 "aoColumns": [
                     { "mDataProp": "m_equip_id", "visible": false, "searchable": true, "targets": [0] },
-                    { "mDataProp": "m_tag_no" },
+                    { "mDataProp": "tag_no" },
                     { "mDataProp": "m_area_name" },
                     { "mDataProp": "m_manu_name" },
-                    { "mDataProp": "m_substance" },
+                    { "mDataProp": "capacity" },
+                    { "mDataProp": "fla" },
+                    { "mDataProp": "rpm" },
+                    { "mDataProp": "volt" },
+                    { "mDataProp": "frame" },
+                    { "mDataProp": "de" },
+                    { "mDataProp": "nde" },
+                    { "mDataProp": "wiring" },
                     {
                         "mData": function (data, row) {
                             return '<a class="btn bg-red-thunderbird bg-font-red-thunderbird edit-status-equipment" href="javascript:;">EDIT</a>' +
@@ -269,19 +277,26 @@
         /* SAVE MASTER equipment */
         function saveequipment() {
 
-            var materi = new FormData();
-            materi.append('m_equipment_code', $('#txtkodeequipment').val());
-            materi.append('m_equipment_name', $('#txtnamaequipment').val());
-            materi.append('m_equipment_type', $('#txttipeequipment').val());
-            materi.append('m_substance', $('#txtsubstanceequipment').val());
-            materi.append('status', 'ACTIVE');
-            materi.append("m_equipment_id", $('#txtequipmentid').val());
+            var eq = new FormData();
+            eq.append('m_tag_no', $('#txtTagNo').val());
+            eq.append('m_area', $('#txtArea').val());
+            eq.append('m_manufacture', $('#txtManufacture').val());
+            eq.append('m_capacity', $('#txtCapacity').val());
+            eq.append('m_fla', $('#txtFla').val());
+            eq.append('m_rpm', $('#txtRpm').val());
+            eq.append('m_volt', $('#txtVolt').val());
+            eq.append('m_frame', $('#txtFrame').val());
+            eq.append('m_bearing_de', $('#txtDe').val());
+            eq.append('m_bearing_nde', $('#txtNde').val());
+            eq.append('m_wiring_de', $('#txtWiring').val());
+            eq.append('status', 'ACTIVE');
+            eq.append("m_equip_id", $('#txtequipmentid').val());
 
             // DO POST
             $.ajax({
                 type: "POST",
                 url: "/master/saveequipment",
-                data: materi,
+                data: eq,
                 contentType: false,
                 processData: false,
                 success: function (result) {

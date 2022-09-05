@@ -114,19 +114,16 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
           <Property Name="created_date" Type="datetime" />
           <Property Name="m_manu_name" Type="varchar" MaxLength="255" />
           <Property Name="m_area_name" Type="varchar" MaxLength="255" />
+          <Property Name="tag_no" Type="varchar" MaxLength="255" />
+          <Property Name="capacity" Type="varchar" MaxLength="255" />
+          <Property Name="fla" Type="varchar" MaxLength="255" />
+          <Property Name="rpm" Type="varchar" MaxLength="255" />
+          <Property Name="volt" Type="varchar" MaxLength="255" />
+          <Property Name="frame" Type="varchar" MaxLength="255" />
+          <Property Name="de" Type="varchar" MaxLength="255" />
+          <Property Name="nde" Type="varchar" MaxLength="255" />
+          <Property Name="wiring" Type="varchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__tn_m_equi__m_man__2E1BDC42">
-          <End Role="tn_m_manufacture" Type="Self.tn_m_manufacture" Multiplicity="0..1" />
-          <End Role="tn_m_equipment" Type="Self.tn_m_equipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tn_m_manufacture">
-              <PropertyRef Name="m_manu_id" />
-            </Principal>
-            <Dependent Role="tn_m_equipment">
-              <PropertyRef Name="m_manufacture" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DB_SKRIPSIModelStoreContainer">
           <EntitySet Name="tn_m_area" EntityType="Self.tn_m_area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tn_m_dropdown" EntityType="Self.tn_m_dropdown" Schema="dbo" store:Type="Tables" />
@@ -154,13 +151,18 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
     [V_Equipment].[created_by] AS [created_by], 
     [V_Equipment].[created_date] AS [created_date], 
     [V_Equipment].[m_manu_name] AS [m_manu_name], 
-    [V_Equipment].[m_area_name] AS [m_area_name]
+    [V_Equipment].[m_area_name] AS [m_area_name], 
+    [V_Equipment].[tag_no] AS [tag_no], 
+    [V_Equipment].[capacity] AS [capacity], 
+    [V_Equipment].[fla] AS [fla], 
+    [V_Equipment].[rpm] AS [rpm], 
+    [V_Equipment].[volt] AS [volt], 
+    [V_Equipment].[frame] AS [frame], 
+    [V_Equipment].[de] AS [de], 
+    [V_Equipment].[nde] AS [nde], 
+    [V_Equipment].[wiring] AS [wiring]
     FROM [dbo].[V_Equipment] AS [V_Equipment]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__tn_m_equi__m_man__2E1BDC42" Association="Self.FK__tn_m_equi__m_man__2E1BDC42">
-            <End Role="tn_m_manufacture" EntitySet="tn_m_manufacture" />
-            <End Role="tn_m_equipment" EntitySet="tn_m_equipment" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -193,23 +195,10 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
           <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="created_by" Type="Int32" />
           <Property Name="created_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tn_m_manufacture" Relationship="Self.FK__tn_m_equi__m_man__2E1BDC42" FromRole="tn_m_equipment" ToRole="tn_m_manufacture" />
           <Property Name="m_bearing_de" Type="Int32" />
           <Property Name="m_bearing_nde" Type="Int32" />
           <Property Name="m_wiring_de" Type="Int32" />
           <Property Name="m_wiring_nde" Type="Int32" />
-        </EntityType>
-        <EntityType Name="tn_m_manufacture">
-          <Key>
-            <PropertyRef Name="m_manu_id" />
-          </Key>
-          <Property Name="m_manu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="m_manu_code" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="m_manu_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="created_by" Type="Int32" />
-          <Property Name="created_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tn_m_equipment" Relationship="Self.FK__tn_m_equi__m_man__2E1BDC42" FromRole="tn_m_manufacture" ToRole="tn_m_equipment" />
         </EntityType>
         <EntityType Name="tn_m_material">
           <Key>
@@ -245,31 +234,15 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
           <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK__tn_m_equi__m_man__2E1BDC42">
-          <End Role="tn_m_manufacture" Type="Self.tn_m_manufacture" Multiplicity="0..1" />
-          <End Role="tn_m_equipment" Type="Self.tn_m_equipment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tn_m_manufacture">
-              <PropertyRef Name="m_manu_id" />
-            </Principal>
-            <Dependent Role="tn_m_equipment">
-              <PropertyRef Name="m_manufacture" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="db_conn" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tn_m_area" EntityType="Self.tn_m_area" />
           <EntitySet Name="tn_m_equipment" EntityType="Self.tn_m_equipment" />
-          <EntitySet Name="tn_m_manufacture" EntityType="Self.tn_m_manufacture" />
           <EntitySet Name="tn_m_material" EntityType="Self.tn_m_material" />
           <EntitySet Name="tn_u_login" EntityType="Self.tn_u_login" />
           <EntitySet Name="tn_users" EntityType="Self.tn_users" />
-          <AssociationSet Name="FK__tn_m_equi__m_man__2E1BDC42" Association="Self.FK__tn_m_equi__m_man__2E1BDC42">
-            <End Role="tn_m_manufacture" EntitySet="tn_m_manufacture" />
-            <End Role="tn_m_equipment" EntitySet="tn_m_equipment" />
-          </AssociationSet>
           <EntitySet Name="tn_m_dropdown" EntityType="DB_SKRIPSIModel.tn_m_dropdown" />
           <EntitySet Name="V_Equipment" EntityType="DB_SKRIPSIModel.V_Equipment" />
+          <EntitySet Name="tn_m_manufacture" EntityType="DB_SKRIPSIModel.tn_m_manufacture" />
         </EntityContainer>
         <EntityType Name="tn_m_dropdown">
           <Key>
@@ -301,6 +274,26 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
           <Property Name="created_date" Type="DateTime" Precision="3" />
           <Property Name="m_manu_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="m_area_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tag_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="capacity" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fla" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rpm" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="volt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="frame" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="de" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nde" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="wiring" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tn_m_manufacture">
+          <Key>
+            <PropertyRef Name="m_manu_id" />
+          </Key>
+          <Property Name="m_manu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="m_manu_code" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="m_manu_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -336,18 +329,6 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
                 <ScalarProperty Name="m_rpm" ColumnName="m_rpm" />
                 <ScalarProperty Name="m_volt" ColumnName="m_volt" />
                 <ScalarProperty Name="m_frame" ColumnName="m_frame" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="created_by" ColumnName="created_by" />
-                <ScalarProperty Name="created_date" ColumnName="created_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tn_m_manufacture">
-            <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_manufacture">
-              <MappingFragment StoreEntitySet="tn_m_manufacture">
-                <ScalarProperty Name="m_manu_id" ColumnName="m_manu_id" />
-                <ScalarProperty Name="m_manu_code" ColumnName="m_manu_code" />
-                <ScalarProperty Name="m_manu_name" ColumnName="m_manu_name" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="created_by" ColumnName="created_by" />
                 <ScalarProperty Name="created_date" ColumnName="created_date" />
@@ -403,6 +384,15 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
           <EntitySetMapping Name="V_Equipment">
             <EntityTypeMapping TypeName="DB_SKRIPSIModel.V_Equipment">
               <MappingFragment StoreEntitySet="V_Equipment">
+                <ScalarProperty Name="wiring" ColumnName="wiring" />
+                <ScalarProperty Name="nde" ColumnName="nde" />
+                <ScalarProperty Name="de" ColumnName="de" />
+                <ScalarProperty Name="frame" ColumnName="frame" />
+                <ScalarProperty Name="volt" ColumnName="volt" />
+                <ScalarProperty Name="rpm" ColumnName="rpm" />
+                <ScalarProperty Name="fla" ColumnName="fla" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="tag_no" ColumnName="tag_no" />
                 <ScalarProperty Name="m_area_name" ColumnName="m_area_name" />
                 <ScalarProperty Name="m_manu_name" ColumnName="m_manu_name" />
                 <ScalarProperty Name="created_date" ColumnName="created_date" />
@@ -421,6 +411,18 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
                 <ScalarProperty Name="m_area" ColumnName="m_area" />
                 <ScalarProperty Name="m_tag_no" ColumnName="m_tag_no" />
                 <ScalarProperty Name="m_equip_id" ColumnName="m_equip_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tn_m_manufacture">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.tn_m_manufacture">
+              <MappingFragment StoreEntitySet="tn_m_manufacture">
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="m_manu_name" ColumnName="m_manu_name" />
+                <ScalarProperty Name="m_manu_code" ColumnName="m_manu_code" />
+                <ScalarProperty Name="m_manu_id" ColumnName="m_manu_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

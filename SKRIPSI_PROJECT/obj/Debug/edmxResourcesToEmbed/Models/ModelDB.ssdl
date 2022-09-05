@@ -109,19 +109,16 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
     <Property Name="created_date" Type="datetime" />
     <Property Name="m_manu_name" Type="varchar" MaxLength="255" />
     <Property Name="m_area_name" Type="varchar" MaxLength="255" />
+    <Property Name="tag_no" Type="varchar" MaxLength="255" />
+    <Property Name="capacity" Type="varchar" MaxLength="255" />
+    <Property Name="fla" Type="varchar" MaxLength="255" />
+    <Property Name="rpm" Type="varchar" MaxLength="255" />
+    <Property Name="volt" Type="varchar" MaxLength="255" />
+    <Property Name="frame" Type="varchar" MaxLength="255" />
+    <Property Name="de" Type="varchar" MaxLength="255" />
+    <Property Name="nde" Type="varchar" MaxLength="255" />
+    <Property Name="wiring" Type="varchar" MaxLength="255" />
   </EntityType>
-  <Association Name="FK__tn_m_equi__m_man__2E1BDC42">
-    <End Role="tn_m_manufacture" Type="Self.tn_m_manufacture" Multiplicity="0..1" />
-    <End Role="tn_m_equipment" Type="Self.tn_m_equipment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tn_m_manufacture">
-        <PropertyRef Name="m_manu_id" />
-      </Principal>
-      <Dependent Role="tn_m_equipment">
-        <PropertyRef Name="m_manufacture" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="DB_SKRIPSIModelStoreContainer">
     <EntitySet Name="tn_m_area" EntityType="Self.tn_m_area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tn_m_dropdown" EntityType="Self.tn_m_dropdown" Schema="dbo" store:Type="Tables" />
@@ -149,12 +146,17 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
     [V_Equipment].[created_by] AS [created_by], 
     [V_Equipment].[created_date] AS [created_date], 
     [V_Equipment].[m_manu_name] AS [m_manu_name], 
-    [V_Equipment].[m_area_name] AS [m_area_name]
+    [V_Equipment].[m_area_name] AS [m_area_name], 
+    [V_Equipment].[tag_no] AS [tag_no], 
+    [V_Equipment].[capacity] AS [capacity], 
+    [V_Equipment].[fla] AS [fla], 
+    [V_Equipment].[rpm] AS [rpm], 
+    [V_Equipment].[volt] AS [volt], 
+    [V_Equipment].[frame] AS [frame], 
+    [V_Equipment].[de] AS [de], 
+    [V_Equipment].[nde] AS [nde], 
+    [V_Equipment].[wiring] AS [wiring]
     FROM [dbo].[V_Equipment] AS [V_Equipment]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__tn_m_equi__m_man__2E1BDC42" Association="Self.FK__tn_m_equi__m_man__2E1BDC42">
-      <End Role="tn_m_manufacture" EntitySet="tn_m_manufacture" />
-      <End Role="tn_m_equipment" EntitySet="tn_m_equipment" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>

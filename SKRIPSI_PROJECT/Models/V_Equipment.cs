@@ -32,5 +32,14 @@ namespace SKRIPSI_PROJECT.Models
         public Nullable<System.DateTime> created_date { get; set; }
         public string m_manu_name { get; set; }
         public string m_area_name { get; set; }
+        public string tag_no { get; set; }
+        public string capacity { get; set; }
+        public string fla { get; set; }
+        public string rpm { get; set; }
+        public string volt { get; set; }
+        public string frame { get; set; }
+        public string de { get; set; }
+        public string nde { get; set; }
+        public string wiring { get; set; }
     }
 }

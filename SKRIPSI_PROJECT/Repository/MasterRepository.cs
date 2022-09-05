@@ -525,23 +525,20 @@ namespace SKRIPSI_PROJECT.Repository
                 }
                 else
                 {
-                    //tn_m_equipment eq = _conn.tn_m_equipment.Single(m => m.m_equip_id == equipment.m_equip_id);
-                    //_conn.tn_m_equipment.Attach(eq);
-                    //eq.m_area = equipment.m_area;
-                    //eq.m_bearing_de = equipment.m_bearing_de;
-                    //eq.m_bearing_nde = equipment.m_bearing_nde;
-                    //eq.m_capacity = equipment.m_capacity;
-                    //eq.m_fla = equipment.m_fla;
-                    //eq.m_frame = equipment.m_frame;
-                    //eq.m_manufacture = equipment.m_manufacture;
-                    //eq.m_rpm = equipment.m_rpm;
-                    //eq.m_tag_no = equipment.m_tag_no;
-                    //eq.m_volt = equipment.m_volt;
-                    //eq.m_wiring_de = 
-                    //mat.m_material_name = materi.m_material_name;
-                    //mat.m_material_type = materi.m_material_type;
-                    //mat.m_substance = materi.m_substance;
-                    //_conn.SaveChanges();
+                    tn_m_equipment eq = _conn.tn_m_equipment.Single(m => m.m_equip_id == equipment.m_equip_id);
+                    _conn.tn_m_equipment.Attach(eq);
+                    eq.m_area = equipment.m_area;
+                    eq.m_bearing_de = equipment.m_bearing_de;
+                    eq.m_bearing_nde = equipment.m_bearing_nde;
+                    eq.m_capacity = equipment.m_capacity;
+                    eq.m_fla = equipment.m_fla;
+                    eq.m_frame = equipment.m_frame;
+                    eq.m_manufacture = equipment.m_manufacture;
+                    eq.m_rpm = equipment.m_rpm;
+                    eq.m_tag_no = equipment.m_tag_no;
+                    eq.m_volt = equipment.m_volt;
+                    eq.m_wiring_de = equipment.m_wiring_de;
+                    _conn.SaveChanges();
                 }
 
             }

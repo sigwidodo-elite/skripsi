@@ -396,5 +396,34 @@ namespace SKRIPSI_PROJECT.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult SaveEquipment(tn_m_equipment eq)
+        {
+
+            if (Session["sessionUser"] == null)
+            {
+                return Json("timeout", JsonRequestBehavior.AllowGet);
+            }
+
+            bool save = false;
+            try
+            {
+
+                tn_u_login user = (tn_u_login)Session["sessionUser"];
+                eq.created_by = user.u_id;
+                save = masterRepository.SaveEquipment(eq);
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+                return Json("error", JsonRequestBehavior.AllowGet);
+
+            }
+
+            return Json(save, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }
