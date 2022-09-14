@@ -11,41 +11,36 @@ namespace SKRIPSI_PROJECT.Repository
     {
 
         private db_conn _conn = new db_conn();
-
         
-        public List<tn_m_area> GetlistArea()
+        public List<m_area> GetlistArea()
         {
 
-            List<tn_m_area> listArea = new List<tn_m_area>();
+            List<m_area> listArea = new List<m_area>();
 
             try
             {
-
                 _conn = new db_conn();
-                listArea = _conn.tn_m_area.ToList();
+                listArea = _conn.m_area.ToList();
             }
             catch (SqlException e)
             {
-
                 Console.WriteLine(e);
                 throw;
-
             }
 
             return listArea;
-
         }
 
-        public tn_m_area GetDetailArea(int? id)
+        public m_area GetDetailArea(int? id)
         {
 
-            tn_m_area area = new tn_m_area();
+            m_area area = new m_area();
 
             try
             {
 
                 _conn = new db_conn();
-                area = _conn.tn_m_area.Single(m => m.m_area_id == id);
+                area = _conn.m_area.Single(m => m.area_id == id);
             }
             catch (SqlException e)
             {
@@ -59,35 +54,32 @@ namespace SKRIPSI_PROJECT.Repository
 
         }
 
-        public bool SaveArea(tn_m_area area)
+        public bool SaveArea(m_area area)
         {
 
             try
             {
 
                 _conn = new db_conn();
-                if (area.m_area_id == 0)
+                if (area.area_id == 0)
                 {
                     area.created_date = DateTime.Now;
-                    _conn.tn_m_area.Add(area);
+                    _conn.m_area.Add(area);
                     _conn.SaveChanges();
                 }
                 else {
-                    tn_m_area ar = _conn.tn_m_area.Single(m => m.m_area_id == area.m_area_id);
-                    _conn.tn_m_area.Attach(ar);
-                    ar.m_area_code = area.m_area_code;
-                    ar.m_area_name = area.m_area_name;
+                    m_area ar = _conn.m_area.Single(m => m.area_id == area.area_id);
+                    _conn.m_area.Attach(ar);
+                    ar.area_name = area.area_name;
                     _conn.SaveChanges();
                 }
 
             }
             catch (SqlException e)
             {
-
                 Console.WriteLine(e);
                 return false;
                 throw;
-
             }
 
             return true;
@@ -101,8 +93,8 @@ namespace SKRIPSI_PROJECT.Repository
             {
 
                 _conn = new db_conn();
-                tn_m_area eth = _conn.tn_m_area.Single(m => m.m_area_id == id);
-                _conn.tn_m_area.Remove(eth);
+                m_area eth = _conn.m_area.Single(m => m.area_id == id);
+                _conn.m_area.Remove(eth);
                 _conn.SaveChanges();
 
             }
@@ -119,39 +111,34 @@ namespace SKRIPSI_PROJECT.Repository
 
         }
 
-        public List<tn_m_manufacture> GetListManufacture()
+        public List<m_manufacture> GetListManufacture()
         {
 
-            List<tn_m_manufacture> listManu = new List<tn_m_manufacture>();
-
+            List<m_manufacture> listManu = new List<m_manufacture>();
             try
             {
-
                 _conn = new db_conn();
-                listManu = _conn.tn_m_manufacture.ToList();
+                listManu = _conn.m_manufacture.ToList();
             }
             catch (SqlException e)
             {
-
                 Console.WriteLine(e);
                 throw;
-
             }
 
             return listManu;
-
         }
 
-        public tn_m_manufacture GetDetailManufacture(int? id)
+        public m_manufacture GetDetailManufacture(int? id)
         {
 
-            tn_m_manufacture manu = new tn_m_manufacture();
+            m_manufacture manu = new m_manufacture();
 
             try
             {
 
                 _conn = new db_conn();
-                manu = _conn.tn_m_manufacture.Single(m => m.m_manu_id == id);
+                manu = _conn.m_manufacture.Single(m => m.manufacture_id == id);
             }
             catch (SqlException e)
             {
@@ -165,35 +152,32 @@ namespace SKRIPSI_PROJECT.Repository
 
         }
 
-        public bool SaveManufacture(tn_m_manufacture manu)
+        public bool SaveManufacture(m_manufacture manu)
         {
 
             try
             {
                 _conn = new db_conn();
-                if (manu.m_manu_id == 0)
+                if (manu.manufacture_id == 0)
                 {
                     manu.created_date = DateTime.Now;
-                    _conn.tn_m_manufacture.Add(manu);
+                    _conn.m_manufacture.Add(manu);
                     _conn.SaveChanges();
                 }
                 else
                 {
-                    tn_m_manufacture man = _conn.tn_m_manufacture.Single(m => m.m_manu_id == manu.m_manu_id);
-                    _conn.tn_m_manufacture.Attach(man);
-                    man.m_manu_code = manu.m_manu_code;
-                    man.m_manu_name = manu.m_manu_name;
+                    m_manufacture man = _conn.m_manufacture.Single(m => m.manufacture_id == manu.manufacture_id);
+                    _conn.m_manufacture.Attach(man);
+                    man.manufacture_name = manu.manufacture_name;
                     _conn.SaveChanges();
                 }
 
             }
             catch (SqlException e)
             {
-
                 Console.WriteLine(e);
                 return false;
                 throw;
-
             }
 
             return true;
@@ -207,8 +191,8 @@ namespace SKRIPSI_PROJECT.Repository
             {
 
                 _conn = new db_conn();
-                tn_m_manufacture eth = _conn.tn_m_manufacture.Single(m => m.m_manu_id == id);
-                _conn.tn_m_manufacture.Remove(eth);
+                m_manufacture eth = _conn.m_manufacture.Single(m => m.manufacture_id == id);
+                _conn.m_manufacture.Remove(eth);
                 _conn.SaveChanges();
 
             }
@@ -225,16 +209,16 @@ namespace SKRIPSI_PROJECT.Repository
 
         }
 
-        public List<tn_m_material> GetListMaterial()
+        public List<m_material> GetListMaterial()
         {
 
-            List<tn_m_material> list = new List<tn_m_material>();
+            List<m_material> list = new List<m_material>();
 
             try
             {
 
                 _conn = new db_conn();
-                list = _conn.tn_m_material.ToList();
+                list = _conn.m_material.ToList();
             }
             catch (SqlException e)
             {
@@ -248,16 +232,16 @@ namespace SKRIPSI_PROJECT.Repository
 
         }
 
-        public tn_m_material GetDetailMaterial(int? id)
+        public m_material GetDetailMaterial(int? id)
         {
 
-            tn_m_material manu = new tn_m_material();
+            m_material manu = new m_material();
 
             try
             {
 
                 _conn = new db_conn();
-                manu = _conn.tn_m_material.Single(m => m.m_material_id == id);
+                manu = _conn.m_material.Single(m => m.material_id == id);
             }
             catch (SqlException e)
             {
@@ -271,26 +255,25 @@ namespace SKRIPSI_PROJECT.Repository
 
         }
 
-        public bool SaveMaterial(tn_m_material materi)
+        public bool SaveMaterial(m_material materi)
         {
 
             try
             {
                 _conn = new db_conn();
-                if (materi.m_material_id == 0)
+                if (materi.material_id == 0)
                 {
                     materi.created_date = DateTime.Now;
-                    _conn.tn_m_material.Add(materi);
+                    _conn.m_material.Add(materi);
                     _conn.SaveChanges();
                 }
                 else
                 {
-                    tn_m_material mat = _conn.tn_m_material.Single(m => m.m_material_id == materi.m_material_id);
-                    _conn.tn_m_material.Attach(mat);
-                    mat.m_material_code = materi.m_material_code;
-                    mat.m_material_name = materi.m_material_name;
-                    mat.m_material_type = materi.m_material_type;
-                    mat.m_substance = materi.m_substance;
+                    m_material mat = _conn.m_material.Single(m => m.material_id == materi.material_id);
+                    _conn.m_material.Attach(mat);
+                    mat.material_value = materi.material_value;
+                    mat.material_type = materi.material_type;
+                    mat.material_ing = materi.material_ing;
                     _conn.SaveChanges();
                 }
 
@@ -315,8 +298,8 @@ namespace SKRIPSI_PROJECT.Repository
             {
 
                 _conn = new db_conn();
-                tn_m_material eth = _conn.tn_m_material.Single(m => m.m_material_id == id);
-                _conn.tn_m_material.Remove(eth);
+                m_material eth = _conn.m_material.Single(m => m.material_id == id);
+                _conn.m_material.Remove(eth);
                 _conn.SaveChanges();
 
             }
@@ -368,14 +351,14 @@ namespace SKRIPSI_PROJECT.Repository
             return list;
         }
 
-        public List<tn_m_material> GetListWiring()
+        public List<m_material> GetListWiring()
         {
 
-            List<tn_m_material> list = new List<tn_m_material>();
+            List<m_material> list = new List<m_material>();
             try
             {
                 _conn = new db_conn();
-                list = _conn.tn_m_material.Where(m => m.m_substance == "WIRING").ToList();
+                list = _conn.m_material.Where(m => m.material_ing == "WIRING").ToList();
             }
             catch (SqlException e)
             {
@@ -440,14 +423,14 @@ namespace SKRIPSI_PROJECT.Repository
             return list;
         }
 
-        public List<tn_m_material> GetListDE()
+        public List<m_material> GetListDE()
         {
 
-            List<tn_m_material> list = new List<tn_m_material>();
+            List<m_material> list = new List<m_material>();
             try
             {
                 _conn = new db_conn();
-                list = _conn.tn_m_material.Where(m => m.m_substance == "BEARING" && m.m_material_type == "DE").ToList();
+                list = _conn.m_material.Where(m => m.material_ing == "BEARING" && m.material_type == "DE").ToList();
             }
             catch (SqlException e)
             {
@@ -458,14 +441,14 @@ namespace SKRIPSI_PROJECT.Repository
             return list;
         }
 
-        public List<tn_m_material> GetListNDE()
+        public List<m_material> GetListNDE()
         {
 
-            List<tn_m_material> list = new List<tn_m_material>();
+            List<m_material> list = new List<m_material>();
             try
             {
                 _conn = new db_conn();
-                list = _conn.tn_m_material.Where(m => m.m_substance == "BEARING" && m.m_material_type == "NDE").ToList();
+                list = _conn.m_material.Where(m => m.material_ing == "BEARING" && m.material_type == "NDE").ToList();
             }
             catch (SqlException e)
             {

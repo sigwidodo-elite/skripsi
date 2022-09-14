@@ -1,16 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DB_SKRIPSIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="tn_m_area">
-    <Key>
-      <PropertyRef Name="m_area_id" />
-    </Key>
-    <Property Name="m_area_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="m_area_code" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="m_area_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="created_by" Type="Int32" />
-    <Property Name="created_date" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="tn_m_equipment">
     <Key>
       <PropertyRef Name="m_equip_id" />
@@ -49,13 +38,13 @@
     <Key>
       <PropertyRef Name="u_id" />
     </Key>
-    <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="u_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="u_password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="u_role" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="u_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="u_name" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="u_password" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="u_role" MaxLength="25" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="status" MaxLength="25" FixedLength="false" Unicode="false" Type="String" />
     <Property Name="created_by" Type="Int32" />
-    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <Property Name="created_date" Precision="3" Type="DateTime" />
   </EntityType>
   <EntityType Name="tn_users">
     <Key>
@@ -67,7 +56,6 @@
     <Property Name="role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="db_conn" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="tn_m_area" EntityType="Self.tn_m_area" />
     <EntitySet Name="tn_m_equipment" EntityType="Self.tn_m_equipment" />
     <EntitySet Name="tn_m_material" EntityType="Self.tn_m_material" />
     <EntitySet Name="tn_u_login" EntityType="Self.tn_u_login" />
@@ -75,6 +63,20 @@
     <EntitySet Name="tn_m_dropdown" EntityType="DB_SKRIPSIModel.tn_m_dropdown" />
     <EntitySet Name="V_Equipment" EntityType="DB_SKRIPSIModel.V_Equipment" />
     <EntitySet Name="tn_m_manufacture" EntityType="DB_SKRIPSIModel.tn_m_manufacture" />
+    <EntitySet Name="tn_m_area" EntityType="DB_SKRIPSIModel.tn_m_area" />
+    <EntitySet Name="m_area" EntityType="DB_SKRIPSIModel.m_area" />
+    <EntitySet Name="m_dropdown" EntityType="DB_SKRIPSIModel.m_dropdown" />
+    <EntitySet Name="m_equipment" EntityType="DB_SKRIPSIModel.m_equipment" />
+    <EntitySet Name="m_manufacture" EntityType="DB_SKRIPSIModel.m_manufacture" />
+    <EntitySet Name="m_material" EntityType="DB_SKRIPSIModel.m_material" />
+    <AssociationSet Name="FK__m_equipmen__area__5165187F" Association="DB_SKRIPSIModel.FK__m_equipmen__area__5165187F">
+      <End Role="m_area" EntitySet="m_area" />
+      <End Role="m_equipment" EntitySet="m_equipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__m_equipme__manuf__52593CB8" Association="DB_SKRIPSIModel.FK__m_equipme__manuf__52593CB8">
+      <End Role="m_manufacture" EntitySet="m_manufacture" />
+      <End Role="m_equipment" EntitySet="m_equipment" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="tn_m_dropdown">
     <Key>
@@ -127,4 +129,103 @@
     <Property Name="created_by" Type="Int32" />
     <Property Name="created_date" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="tn_m_area">
+    <Key>
+      <PropertyRef Name="m_area_id" />
+    </Key>
+    <Property Name="m_area_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="m_area_code" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="m_area_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="m_area">
+    <Key>
+      <PropertyRef Name="area_id" />
+    </Key>
+    <Property Name="area_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="area_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="m_equipment" Relationship="DB_SKRIPSIModel.FK__m_equipmen__area__5165187F" FromRole="m_area" ToRole="m_equipment" />
+  </EntityType>
+  <EntityType Name="m_dropdown">
+    <Key>
+      <PropertyRef Name="dropdown_id" />
+    </Key>
+    <Property Name="dropdown_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="criteria" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="m_equipment">
+    <Key>
+      <PropertyRef Name="equipment_id" />
+    </Key>
+    <Property Name="equipment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tag_no" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="area" Type="Int32" />
+    <Property Name="manufacture" Type="Int32" />
+    <Property Name="capacity" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="fla" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="rpm" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="volt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="frame" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="bearing_de" Type="Int32" />
+    <Property Name="bearing_nde" Type="Int32" />
+    <Property Name="wiring_diameter" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="schedule_service" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="m_area" Relationship="DB_SKRIPSIModel.FK__m_equipmen__area__5165187F" FromRole="m_equipment" ToRole="m_area" />
+    <NavigationProperty Name="m_manufacture" Relationship="DB_SKRIPSIModel.FK__m_equipme__manuf__52593CB8" FromRole="m_equipment" ToRole="m_manufacture" />
+  </EntityType>
+  <EntityType Name="m_manufacture">
+    <Key>
+      <PropertyRef Name="manufacture_id" />
+    </Key>
+    <Property Name="manufacture_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="manufacture_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="m_equipment" Relationship="DB_SKRIPSIModel.FK__m_equipme__manuf__52593CB8" FromRole="m_manufacture" ToRole="m_equipment" />
+  </EntityType>
+  <EntityType Name="m_material">
+    <Key>
+      <PropertyRef Name="material_id" />
+    </Key>
+    <Property Name="material_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="material_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="material_ing" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="material_value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="FK__m_equipmen__area__5165187F">
+    <End Type="DB_SKRIPSIModel.m_area" Role="m_area" Multiplicity="0..1" />
+    <End Type="DB_SKRIPSIModel.m_equipment" Role="m_equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m_area">
+        <PropertyRef Name="area_id" />
+      </Principal>
+      <Dependent Role="m_equipment">
+        <PropertyRef Name="area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__m_equipme__manuf__52593CB8">
+    <End Type="DB_SKRIPSIModel.m_manufacture" Role="m_manufacture" Multiplicity="0..1" />
+    <End Type="DB_SKRIPSIModel.m_equipment" Role="m_equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m_manufacture">
+        <PropertyRef Name="manufacture_id" />
+      </Principal>
+      <Dependent Role="m_equipment">
+        <PropertyRef Name="manufacture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

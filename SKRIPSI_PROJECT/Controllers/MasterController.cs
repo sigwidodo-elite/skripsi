@@ -29,7 +29,7 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetListArea()
         {
 
-            List<tn_m_area> listethnic = masterRepository.GetlistArea();
+            List<m_area> listethnic = masterRepository.GetlistArea();
             var jsonResult = Json(listethnic, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
@@ -40,13 +40,13 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetDetailArea(int? id)
         {
 
-            tn_m_area area = masterRepository.GetDetailArea(id);
+            m_area area = masterRepository.GetDetailArea(id);
             return Json(area, JsonRequestBehavior.AllowGet);
 
         }
 
         [HttpPost]
-        public ActionResult SaveArea(tn_m_area area)
+        public ActionResult SaveArea(m_area area)
         {
 
             if (Session["sessionUser"] == null)
@@ -116,7 +116,7 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetListManufacture()
         {
 
-            List<tn_m_manufacture> list = masterRepository.GetListManufacture();
+            List<m_manufacture> list = masterRepository.GetListManufacture();
             var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
@@ -127,13 +127,13 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetDetailManufacture(int? id)
         {
 
-            tn_m_manufacture manu = masterRepository.GetDetailManufacture(id);
+            m_manufacture manu = masterRepository.GetDetailManufacture(id);
             return Json(manu, JsonRequestBehavior.AllowGet);
 
         }
 
         [HttpPost]
-        public ActionResult SaveManufacture(tn_m_manufacture manu)
+        public ActionResult SaveManufacture(m_manufacture manu)
         {
 
             if (Session["sessionUser"] == null)
@@ -203,7 +203,7 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetListMaterial()
         {
 
-            List<tn_m_material> list = masterRepository.GetListMaterial();
+            List<m_material> list = masterRepository.GetListMaterial();
             var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
@@ -214,13 +214,13 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetDetailMaterial(int? id)
         {
 
-            tn_m_material manu = masterRepository.GetDetailMaterial(id);
+            m_material manu = masterRepository.GetDetailMaterial(id);
             return Json(manu, JsonRequestBehavior.AllowGet);
 
         }
 
         [HttpPost]
-        public ActionResult SaveMaterial(tn_m_material materi)
+        public ActionResult SaveMaterial(m_material materi)
         {
 
             if (Session["sessionUser"] == null)
@@ -356,7 +356,7 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetListDE()
         {
 
-            List<tn_m_material> list = masterRepository.GetListDE();
+            List<m_material> list = masterRepository.GetListDE();
             var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
@@ -367,7 +367,7 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetListNDE()
         {
 
-            List<tn_m_material> list = masterRepository.GetListDE();
+            List<m_material> list = masterRepository.GetListDE();
             var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
@@ -378,7 +378,7 @@ namespace SKRIPSI_PROJECT.Controllers
         public JsonResult GetListWiring()
         {
 
-            List<tn_m_material> list = masterRepository.GetListWiring();
+            List<m_material> list = masterRepository.GetListWiring();
             var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;

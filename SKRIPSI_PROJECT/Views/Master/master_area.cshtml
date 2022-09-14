@@ -36,8 +36,7 @@
                                     <tr class="bg-red-thunderbird bg-font-red-thunderbird">
                                         <th style="display:none;"> id </th>
                                         <th> NAMA AREA </th>
-                                        <th> KODE AREA </th>
-                                        <th width="10%"></th>
+                                        <th width="30%"></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -63,14 +62,6 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="txtareaid" class="form-control" />
-                <div class="row" style="margin-bottom: -5px;">
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Kode Area<span class="required"> * </span></label>
-                        <div class="col-md-9" style="padding-right: 40px; !important;">
-                            <input type="text" id="txtkodearea" placeholder="Kode Area" maxlength="100" name="area" class="form-control" />
-                        </div>
-                    </div>
-                </div>
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
                         <label class="control-label col-md-3">Nama Area<span class="required"> * </span></label>
@@ -115,9 +106,8 @@
                 "sAjaxSource": '/master/getlistarea',
                 "sAjaxDataProp": "",
                 "aoColumns": [
-                    { "mDataProp": "m_area_id", "visible": false, "searchable": true, "targets": [0] },
-                    { "mDataProp": "m_area_code" },
-                    { "mDataProp": "m_area_name" },
+                    { "mDataProp": "area_id", "visible": false, "searchable": true, "targets": [0] },
+                    { "mDataProp": "area_name" },
                     {
                         "mData": function (data, row) {
                             return '<a class="btn bg-red-thunderbird bg-font-red-thunderbird edit-status-area" href="javascript:;">EDIT</a>' + 
@@ -153,10 +143,9 @@
         function savearea() {
 
             var area = new FormData();
-            area.append('m_area_code', $('#txtkodearea').val());
-            area.append('m_area_name', $('#txtnamaarea').val());
+            area.append('area_name', $('#txtnamaarea').val());
             area.append('status', 'ACTIVE');
-            area.append("m_area_id", $('#txtareaid').val());
+            area.append("area_id", $('#txtareaid').val());
 
             // DO POST
             $.ajax({
@@ -326,9 +315,8 @@
                 type: "GET",
                 url: "/master/getdetailarea/" + id,
                 success: function (result) {
-                    $('#txtareaid').val(result.m_area_id);
-                    $('#txtkodearea').val(result.m_area_code);
-                    $('#txtnamaarea').val(result.m_area_name);
+                    $('#txtareaid').val(result.area_id);
+                    $('#txtnamaarea').val(result.area_name);
                     $('#btn-add-area').text('Ubah');
                     $('#modal-master-area').modal('show');
 

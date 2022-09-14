@@ -34,10 +34,9 @@
                                     <tr class="bg-red-thunderbird bg-font-red-thunderbird">
                                         <th style="display:none;"> id </th>
                                         <th> NAMA MATERIAL </th>
-                                        <th> KODE MATERIAL </th>
                                         <th> TIPE MATERIAL </th>
                                         <th> BAHAN MATERIAL </th>
-                                        <th width="10%"></th>
+                                        <th width="30%"></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -63,14 +62,6 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="txtmaterialid" class="form-control" />
-                @*<div class="row" style="margin-bottom: -5px;">
-            <div class="form-group">
-                <label class="control-label col-md-3">Kode Material<span class="required"> * </span></label>
-                <div class="col-md-9" style="padding-right: 40px; !important;">
-                    <input type="text" id="txtkodematerial" placeholder="Kode Material" maxlength="100" name="material" class="form-control" />
-                </div>
-            </div>
-        </div>*@
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
                         <label class="control-label col-md-3">Jenis Material<span class="required"> * </span></label>
@@ -145,11 +136,10 @@
                 "sAjaxSource": '/master/getlistmaterial',
                 "sAjaxDataProp": "",
                 "aoColumns": [
-                    { "mDataProp": "m_material_id", "visible": false, "searchable": true, "targets": [0] },
-                    { "mDataProp": "m_material_code" },
-                    { "mDataProp": "m_material_name" },
-                    { "mDataProp": "m_material_type" },
-                    { "mDataProp": "m_substance" },
+                    { "mDataProp": "material_id", "visible": false, "searchable": true, "targets": [0] },
+                    { "mDataProp": "material_value" },
+                    { "mDataProp": "material_type" },
+                    { "mDataProp": "material_ing" },
                     {
                         "mData": function (data, row) {
                             return '<a class="btn bg-red-thunderbird bg-font-red-thunderbird edit-status-material" href="javascript:;">EDIT</a>' +
@@ -198,14 +188,16 @@
             var typeBearing = $("input[name='bearingType']:checked").val();
 
             var materi = new FormData();
-            materi.append('m_material_code', $('#txtnamamaterial').val());
-            materi.append('m_material_name', $('#txtnamamaterial').val());
-            materi.append('m_substance', substance);
+            materi.append('material_value', $('#txtnamamaterial').val());
+            materi.append('material_ing', substance);
             if (substance == 'BEARING') {
-                materi.append('m_material_type', typeBearing);
+                materi.append('material_type', typeBearing);
+            }
+            else {
+                materi.append('material_type', 'DIAMETER');
             }
             materi.append('status', 'ACTIVE');
-            materi.append("m_material_id", $('#txtmaterialid').val());
+            materi.append("material_id", $('#txtmaterialid').val());
 
             // DO POST
             $.ajax({
@@ -375,11 +367,20 @@
                 type: "GET",
                 url: "/master/getdetailmaterial/" + id,
                 success: function (result) {
-                    $('#txtmaterialid').val(result.m_material_id);
-                    $('#txtkodematerial').val(result.m_material_code);
-                    $('#txtnamamaterial').val(result.m_material_name);
-                    $('#txttipematerial').val(result.m_material_type);
-                    $('#txtsubstancematerial').val(result.m_substance);
+                    $('#txtmaterialid').val(result.material_id);
+                    var tkStatus = result.material_ing;
+
+                    if (tkStatus == 'BEARING') {
+                        $('.bearing').show();
+                        $('#txtnamamaterial').parent().siblings().eq(0).text('Nama Bearing')
+                    } else {
+                        $('.bearing').hide();
+                        $('#txtnamamaterial').parent().siblings().eq(0).text('Diameter')
+                    }
+                    $('#txtnamamaterial').val(result.material_value);
+                    alert(result.material_ing);
+                    $("input[value='" + result.material_type + "']").attr('checked', true);
+                    $("input[value='" + result.material_ing + "']").attr('checked', true);
                     $('#btn-add-material').text('Ubah');
                     $('#modal-master-material').modal('show');
 

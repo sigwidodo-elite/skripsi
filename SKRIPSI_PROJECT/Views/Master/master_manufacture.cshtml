@@ -34,8 +34,7 @@
                                     <tr class="bg-red-thunderbird bg-font-red-thunderbird">
                                         <th style="display:none;"> id </th>
                                         <th> NAMA MANUFACTURE </th>
-                                        <th> KODE MANUFACTURE </th>
-                                        <th width="10%"></th>
+                                        <th width="30%"></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -61,14 +60,6 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="txtmanufactureid" class="form-control" />
-                <div class="row" style="margin-bottom: -5px;">
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Kode manufacture<span class="required"> * </span></label>
-                        <div class="col-md-9" style="padding-right: 40px; !important;">
-                            <input type="text" id="txtkodemanufacture" placeholder="Kode Manufacture" maxlength="100" name="manufacture" class="form-control" />
-                        </div>
-                    </div>
-                </div>
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
                         <label class="control-label col-md-3">Nama manufacture<span class="required"> * </span></label>
@@ -113,9 +104,8 @@
                 "sAjaxSource": '/master/getlistmanufacture',
                 "sAjaxDataProp": "",
                 "aoColumns": [
-                    { "mDataProp": "m_manu_id", "visible": false, "searchable": true, "targets": [0] },
-                    { "mDataProp": "m_manu_code" },
-                    { "mDataProp": "m_manu_name" },
+                    { "mDataProp": "manufacture_id", "visible": false, "searchable": true, "targets": [0] },
+                    { "mDataProp": "manufacture_name" },
                     {
                         "mData": function (data, row) {
                             return '<a class="btn bg-red-thunderbird bg-font-red-thunderbird edit-status-manufacture" href="javascript:;">EDIT</a>' +
@@ -151,10 +141,9 @@
         function savemanufacture() {
 
             var manu = new FormData();
-            manu.append('m_manu_code', $('#txtkodemanufacture').val());
-            manu.append('m_manu_name', $('#txtnamamanufacture').val());
+            manu.append('manufacture_name', $('#txtnamamanufacture').val());
             manu.append('status', 'ACTIVE');
-            manu.append("m_manu_id", $('#txtmanufactureid').val());
+            manu.append("manufacture_id", $('#txtmanufactureid').val());
 
             // DO POST
             $.ajax({
@@ -324,9 +313,9 @@
                 type: "GET",
                 url: "/master/getdetailmanufacture/" + id,
                 success: function (result) {
-                    $('#txtmanufactureid').val(result.m_manu_id);
+                    $('#txtmanufactureid').val(result.manufacture_id);
                     $('#txtkodemanufacture').val(result.m_manu_code);
-                    $('#txtnamamanufacture').val(result.m_manu_name);
+                    $('#txtnamamanufacture').val(result.manufacture_name);
                     $('#btn-add-manufacture').text('Ubah');
                     $('#modal-master-manufacture').modal('show');
 

@@ -1,5 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DB_SKRIPSIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="m_area">
+    <Key>
+      <PropertyRef Name="area_id" />
+    </Key>
+    <Property Name="area_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="area_name" Type="varchar" MaxLength="255" />
+    <Property Name="status" Type="varchar" MaxLength="25" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="m_dropdown">
+    <Key>
+      <PropertyRef Name="dropdown_id" />
+    </Key>
+    <Property Name="dropdown_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="criteria" Type="varchar" MaxLength="25" />
+    <Property Name="value" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="m_equipment">
+    <Key>
+      <PropertyRef Name="equipment_id" />
+    </Key>
+    <Property Name="equipment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tag_no" Type="varchar" MaxLength="255" />
+    <Property Name="area" Type="int" />
+    <Property Name="manufacture" Type="int" />
+    <Property Name="capacity" Type="varchar" MaxLength="255" />
+    <Property Name="fla" Type="varchar" MaxLength="255" />
+    <Property Name="rpm" Type="varchar" MaxLength="255" />
+    <Property Name="volt" Type="varchar" MaxLength="255" />
+    <Property Name="frame" Type="varchar" MaxLength="255" />
+    <Property Name="bearing_de" Type="int" />
+    <Property Name="bearing_nde" Type="int" />
+    <Property Name="wiring_diameter" Type="varchar" MaxLength="255" />
+    <Property Name="schedule_service" Type="varchar" MaxLength="50" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="m_manufacture">
+    <Key>
+      <PropertyRef Name="manufacture_id" />
+    </Key>
+    <Property Name="manufacture_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="manufacture_name" Type="varchar" MaxLength="255" />
+    <Property Name="status" Type="varchar" MaxLength="25" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="m_material">
+    <Key>
+      <PropertyRef Name="material_id" />
+    </Key>
+    <Property Name="material_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="material_type" Type="varchar" MaxLength="255" />
+    <Property Name="material_ing" Type="varchar" MaxLength="50" />
+    <Property Name="material_value" Type="varchar" MaxLength="255" />
+    <Property Name="status" Type="varchar" MaxLength="25" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_date" Type="datetime" />
+  </EntityType>
   <EntityType Name="tn_m_area">
     <Key>
       <PropertyRef Name="m_area_id" />
@@ -119,7 +179,36 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
     <Property Name="nde" Type="varchar" MaxLength="255" />
     <Property Name="wiring" Type="varchar" MaxLength="255" />
   </EntityType>
+  <Association Name="FK__m_equipme__manuf__52593CB8">
+    <End Role="m_manufacture" Type="Self.m_manufacture" Multiplicity="0..1" />
+    <End Role="m_equipment" Type="Self.m_equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m_manufacture">
+        <PropertyRef Name="manufacture_id" />
+      </Principal>
+      <Dependent Role="m_equipment">
+        <PropertyRef Name="manufacture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__m_equipmen__area__5165187F">
+    <End Role="m_area" Type="Self.m_area" Multiplicity="0..1" />
+    <End Role="m_equipment" Type="Self.m_equipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m_area">
+        <PropertyRef Name="area_id" />
+      </Principal>
+      <Dependent Role="m_equipment">
+        <PropertyRef Name="area" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DB_SKRIPSIModelStoreContainer">
+    <EntitySet Name="m_area" EntityType="Self.m_area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="m_dropdown" EntityType="Self.m_dropdown" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="m_equipment" EntityType="Self.m_equipment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="m_manufacture" EntityType="Self.m_manufacture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="m_material" EntityType="Self.m_material" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tn_m_area" EntityType="Self.tn_m_area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tn_m_dropdown" EntityType="Self.tn_m_dropdown" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tn_m_equipment" EntityType="Self.tn_m_equipment" Schema="dbo" store:Type="Tables" />
@@ -158,5 +247,13 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
     [V_Equipment].[wiring] AS [wiring]
     FROM [dbo].[V_Equipment] AS [V_Equipment]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK__m_equipme__manuf__52593CB8" Association="Self.FK__m_equipme__manuf__52593CB8">
+      <End Role="m_manufacture" EntitySet="m_manufacture" />
+      <End Role="m_equipment" EntitySet="m_equipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__m_equipmen__area__5165187F" Association="Self.FK__m_equipmen__area__5165187F">
+      <End Role="m_area" EntitySet="m_area" />
+      <End Role="m_equipment" EntitySet="m_equipment" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>
