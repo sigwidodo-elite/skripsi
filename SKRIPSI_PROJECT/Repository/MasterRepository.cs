@@ -477,14 +477,14 @@ namespace SKRIPSI_PROJECT.Repository
             return list;
         }
 
-        public List<V_Equipment> GetListEquipment()
+        public List<V_Equipments> GetListEquipment()
         {
 
-            List<V_Equipment> list = new List<V_Equipment>();
+            List<V_Equipments> list = new List<V_Equipments>();
             try
             {
                 _conn = new db_conn();
-                list = _conn.V_Equipment.ToList();
+                list = _conn.V_Equipments.ToList();
             }
             catch (SqlException e)
             {
@@ -494,33 +494,50 @@ namespace SKRIPSI_PROJECT.Repository
 
             return list;
         }
-        public bool SaveEquipment(tn_m_equipment equipment)
+
+        public V_Equipments GetDetailEquipment(int? id)
+        {
+            _conn = new db_conn();
+            V_Equipments equip = _conn.V_Equipments.FirstOrDefault(m => m.equipment_id == id);
+            return equip;
+        }
+
+        public List<equipment_repairment> GetListEquipmentRepairment(int? id)
+        {
+            _conn = new db_conn();
+            List<equipment_repairment> listRepairment = _conn.equipment_repairment.Where(m => m.equipment_id == id).ToList();
+            return listRepairment;
+        }
+
+        public bool SaveEquipment(m_equipment equipment)
         {
 
             try
             {
                 _conn = new db_conn();
-                if (equipment.m_equip_id == 0)
+                if (equipment.equipment_id == 0)
                 {
                     equipment.created_date = DateTime.Now;
-                    _conn.tn_m_equipment.Add(equipment);
+                    equipment.schedule_service = DateTime.Now.AddYears(5);
+                    _conn.m_equipment.Add(equipment);
                     _conn.SaveChanges();
                 }
                 else
                 {
-                    tn_m_equipment eq = _conn.tn_m_equipment.Single(m => m.m_equip_id == equipment.m_equip_id);
-                    _conn.tn_m_equipment.Attach(eq);
-                    eq.m_area = equipment.m_area;
-                    eq.m_bearing_de = equipment.m_bearing_de;
-                    eq.m_bearing_nde = equipment.m_bearing_nde;
-                    eq.m_capacity = equipment.m_capacity;
-                    eq.m_fla = equipment.m_fla;
-                    eq.m_frame = equipment.m_frame;
-                    eq.m_manufacture = equipment.m_manufacture;
-                    eq.m_rpm = equipment.m_rpm;
-                    eq.m_tag_no = equipment.m_tag_no;
-                    eq.m_volt = equipment.m_volt;
-                    eq.m_wiring_de = equipment.m_wiring_de;
+                    m_equipment eq = _conn.m_equipment.Single(m => m.equipment_id == equipment.equipment_id);
+                    _conn.m_equipment.Attach(eq);
+                    eq.area_id = equipment.area_id;
+                    eq.bearing_de = equipment.bearing_de;
+                    eq.bearing_nde = equipment.bearing_nde;
+                    eq.capacity = equipment.capacity;
+                    eq.fla = equipment.fla;
+                    eq.frame = equipment.frame;
+                    eq.manufacture_id = equipment.manufacture_id;
+                    eq.rpm = equipment.rpm;
+                    eq.tag_no = equipment.tag_no;
+                    eq.volt = equipment.volt;
+                    eq.wiring_diameter = equipment.wiring_diameter;
+                    
                     _conn.SaveChanges();
                 }
 
@@ -536,6 +553,27 @@ namespace SKRIPSI_PROJECT.Repository
 
             return true;
 
+        }
+
+        public bool SaveEquipmentRepair(equipment_repairment repairment) 
+        {
+
+            try
+            {
+
+                _conn = new db_conn();
+                _conn.sp_insert_repairment(repairment.equip_history_id, repairment.equipment_id, repairment.start_date, repairment.status, repairment.created_by);
+
+            }
+            catch (SqlException e)
+            {
+
+                Console.WriteLine(e);
+                return false;
+                throw;
+            }
+
+            return true;
         }
     }
 }

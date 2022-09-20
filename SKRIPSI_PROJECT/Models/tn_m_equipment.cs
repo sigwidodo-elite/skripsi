@@ -23,12 +23,12 @@ namespace SKRIPSI_PROJECT.Models
         public string m_rpm { get; set; }
         public string m_volt { get; set; }
         public string m_frame { get; set; }
-        public string status { get; set; }
-        public Nullable<int> created_by { get; set; }
-        public Nullable<System.DateTime> created_date { get; set; }
         public Nullable<int> m_bearing_de { get; set; }
         public Nullable<int> m_bearing_nde { get; set; }
         public Nullable<int> m_wiring_de { get; set; }
         public Nullable<int> m_wiring_nde { get; set; }
+        public string status { get; set; }
+        public Nullable<int> created_by { get; set; }
+        public Nullable<System.DateTime> created_date { get; set; }
     }
 }

@@ -71,7 +71,7 @@
                                 <span></span>
                             </label>
                             <label class="mt-radio">
-                                <input type="radio" name="materialType" value="WIRING" class="radio-material" checked /> Wiring
+                                <input type="radio" name="materialType" value="WIRING" class="radio-material" /> Wiring
                                 <span></span>
                             </label>
                         </div>
@@ -289,36 +289,7 @@
         }
 
 
-        /* CONFIRM EDIT STATUS MASTER material */
-        function confirmEditStatusmaterial(id) {
-            swal({
-                title: "Konfirmasi Data",
-                text: "Apa Anda Yakin Status Ingin Diubah ?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ya, Ubah!",
-                cancelButtonText: "Tidak, Batalkan Proses!",
-                showLoaderOnConfirm: true,
-                closeOnConfirm: false,
-                closeOnCancel: false
-            }, function (isConfirm) {
-                if (isConfirm) {
-
-                    App.blockUI({
-                        boxed: true
-                    });
-
-                    editStatusmaterial(id);
-
-                } else {
-                    App.unblockUI();
-                    swal("Batal","Status Tidak Jadi Diubah", "error");
-                }
-            });
-        }
-
-
+       
         /* BTN SUBMIT MASTER material */
         $(document).on("click", "#btn-add-material", function (e) {
 
@@ -378,9 +349,8 @@
                         $('#txtnamamaterial').parent().siblings().eq(0).text('Diameter')
                     }
                     $('#txtnamamaterial').val(result.material_value);
-                    alert(result.material_ing);
-                    $("input[value='" + result.material_type + "']").attr('checked', true);
-                    $("input[value='" + result.material_ing + "']").attr('checked', true);
+                    $('input.radio-material[value="' + result.material_type + '"]').prop('checked', true);
+                    $('input.radio-material[value="' + result.material_ing + '"]').prop('checked', true);
                     $('#btn-add-material').text('Ubah');
                     $('#modal-master-material').modal('show');
 
@@ -476,10 +446,10 @@
 
             if (tkStatus == 'BEARING') {
                 $('.bearing').show();
-                $('#txtnamamaterial').parent().siblings().eq(0).text('Nama Bearing')
+                $('#txtnamamaterial').parent().siblings().eq(0).text('Nama Bearing');
             } else {
                 $('.bearing').hide();
-                $('#txtnamamaterial').parent().siblings().eq(0).text('Diameter')
+                $('#txtnamamaterial').parent().siblings().eq(0).text('Diameter');
             }
 
         });

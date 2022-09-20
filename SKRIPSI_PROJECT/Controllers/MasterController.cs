@@ -281,16 +281,27 @@ namespace SKRIPSI_PROJECT.Controllers
             {
                 return RedirectToAction("signout");
             }
-
-            tn_u_login user = (tn_u_login)Session["sessionUser"];
-            return View(path + "master_equipment.cshtml", user);
+            Helper helper = new Helper();
+            helper.listArea = masterRepository.GetlistArea();
+            helper.listCapacity = masterRepository.GetListCapacity();
+            helper.listDE = masterRepository.GetListDE();
+            helper.listFLA = masterRepository.GetListFLA();
+            helper.listFrame = masterRepository.GetListFrame();
+            helper.listManufacture = masterRepository.GetListManufacture();
+            helper.listNDE = masterRepository.GetListNDE();
+            helper.listRPM = masterRepository.GetListRPM();
+            helper.listTagNo = masterRepository.GetListTAG();
+            helper.listVolt = masterRepository.GetListVolt();
+            helper.listWiring = masterRepository.GetListWiring();
+            helper.user = (tn_u_login)Session["sessionUser"];
+            return View(path + "master_equipment.cshtml", helper);
         }
 
         [HttpGet]
         public JsonResult GetListEquipment()
         {
 
-            List<V_Equipment> list = masterRepository.GetListEquipment();
+            List<V_Equipments> list = masterRepository.GetListEquipment();
             var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
@@ -396,8 +407,19 @@ namespace SKRIPSI_PROJECT.Controllers
 
         }
 
+        [HttpGet]
+        public JsonResult GetListEquipmentRepairment(int? id)
+        {
+
+            List<equipment_repairment> list = masterRepository.GetListEquipmentRepairment(id);
+            var jsonResult = Json(list, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+
+        }
+
         [HttpPost]
-        public ActionResult SaveEquipment(tn_m_equipment eq)
+        public ActionResult SaveEquipment(m_equipment eq)
         {
 
             if (Session["sessionUser"] == null)
@@ -424,6 +446,44 @@ namespace SKRIPSI_PROJECT.Controllers
 
             return Json(save, JsonRequestBehavior.AllowGet);
 
+        }
+
+        [HttpPost]
+        public ActionResult SaveEquipmentRepairment(equipment_repairment repairment)
+        {
+
+            if (Session["sessionUser"] == null)
+            {
+                return Json("timeout", JsonRequestBehavior.AllowGet);
+            }
+
+            bool save = false;
+            try
+            {
+
+                tn_u_login user = (tn_u_login)Session["sessionUser"];
+                repairment.created_by = user.u_id;
+                save = masterRepository.SaveEquipmentRepair(repairment);
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+                return Json("error", JsonRequestBehavior.AllowGet);
+
+            }
+
+            return Json(save, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpGet]
+        public JsonResult GetDetailEquipment(int? id)
+        {
+
+            V_Equipments equip = masterRepository.GetDetailEquipment(id);
+            return Json(equip, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DB_SKRIPSIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="equipment_repairment">
+    <Key>
+      <PropertyRef Name="equip_history_id" />
+    </Key>
+    <Property Name="equip_history_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="equipment_id" Type="int" />
+    <Property Name="start_date" Type="varchar" MaxLength="25" />
+    <Property Name="end_date" Type="varchar" MaxLength="25" />
+    <Property Name="duration" Type="int" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_date" Type="datetime" />
+    <Property Name="updated_by" Type="int" />
+    <Property Name="updated_date" Type="datetime" />
+  </EntityType>
   <EntityType Name="m_area">
     <Key>
       <PropertyRef Name="area_id" />
@@ -24,8 +39,8 @@
     </Key>
     <Property Name="equipment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tag_no" Type="varchar" MaxLength="255" />
-    <Property Name="area" Type="int" />
-    <Property Name="manufacture" Type="int" />
+    <Property Name="area_id" Type="int" />
+    <Property Name="manufacture_id" Type="int" />
     <Property Name="capacity" Type="varchar" MaxLength="255" />
     <Property Name="fla" Type="varchar" MaxLength="255" />
     <Property Name="rpm" Type="varchar" MaxLength="255" />
@@ -34,7 +49,11 @@
     <Property Name="bearing_de" Type="int" />
     <Property Name="bearing_nde" Type="int" />
     <Property Name="wiring_diameter" Type="varchar" MaxLength="255" />
-    <Property Name="schedule_service" Type="varchar" MaxLength="50" />
+    <Property Name="schedule_service" Type="datetime" />
+    <Property Name="last_service" Type="varchar" MaxLength="50" />
+    <Property Name="mttr" Type="varchar" MaxLength="50" />
+    <Property Name="mttf" Type="varchar" MaxLength="50" />
+    <Property Name="overdue_schedule" Type="varchar" MaxLength="50" />
     <Property Name="created_by" Type="int" />
     <Property Name="created_date" Type="datetime" />
   </EntityType>
@@ -179,31 +198,46 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
     <Property Name="nde" Type="varchar" MaxLength="255" />
     <Property Name="wiring" Type="varchar" MaxLength="255" />
   </EntityType>
-  <Association Name="FK__m_equipme__manuf__52593CB8">
-    <End Role="m_manufacture" Type="Self.m_manufacture" Multiplicity="0..1" />
-    <End Role="m_equipment" Type="Self.m_equipment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="m_manufacture">
-        <PropertyRef Name="manufacture_id" />
-      </Principal>
-      <Dependent Role="m_equipment">
-        <PropertyRef Name="manufacture" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__m_equipmen__area__5165187F">
-    <End Role="m_area" Type="Self.m_area" Multiplicity="0..1" />
-    <End Role="m_equipment" Type="Self.m_equipment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="m_area">
-        <PropertyRef Name="area_id" />
-      </Principal>
-      <Dependent Role="m_equipment">
-        <PropertyRef Name="area" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="V_Equipments">
+    <Key>
+      <PropertyRef Name="equipment_id" />
+      <PropertyRef Name="overdue" />
+    </Key>
+    <Property Name="equipment_id" Type="int" Nullable="false" />
+    <Property Name="tag_no" Type="varchar" MaxLength="255" />
+    <Property Name="area_id" Type="int" />
+    <Property Name="manufacture_id" Type="int" />
+    <Property Name="capacity" Type="varchar" MaxLength="255" />
+    <Property Name="fla" Type="varchar" MaxLength="255" />
+    <Property Name="rpm" Type="varchar" MaxLength="255" />
+    <Property Name="volt" Type="varchar" MaxLength="255" />
+    <Property Name="frame" Type="varchar" MaxLength="255" />
+    <Property Name="bearing_de" Type="int" />
+    <Property Name="bearing_nde" Type="int" />
+    <Property Name="wiring_diameter" Type="varchar" MaxLength="255" />
+    <Property Name="schedule_service" Type="varchar" MaxLength="20" />
+    <Property Name="area_name" Type="varchar" MaxLength="255" />
+    <Property Name="manufacture_name" Type="varchar" MaxLength="255" />
+    <Property Name="de" Type="varchar" MaxLength="255" />
+    <Property Name="nde" Type="varchar" MaxLength="255" />
+    <Property Name="val_tag_no" Type="varchar" MaxLength="255" />
+    <Property Name="wiring_value" Type="varchar" MaxLength="255" />
+    <Property Name="last_service" Type="varchar" MaxLength="20" />
+    <Property Name="mttf" Type="varchar" MaxLength="50" />
+    <Property Name="mttr" Type="varchar" MaxLength="50" />
+    <Property Name="overdue" Type="varchar" MaxLength="7" Nullable="false" />
+  </EntityType>
+  <Function Name="sp_insert_repairment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="repair_id" Type="int" Mode="In" />
+    <Parameter Name="equipment_id" Type="int" Mode="In" />
+    <Parameter Name="date" Type="varchar" Mode="In" />
+    <Parameter Name="status" Type="varchar" Mode="In" />
+    <Parameter Name="created_by" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="DB_SKRIPSIModelStoreContainer">
+    <EntitySet Name="equipment_repairment" EntityType="Self.equipment_repairment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="m_area" EntityType="Self.m_area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="m_dropdown" EntityType="Self.m_dropdown" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="m_equipment" EntityType="Self.m_equipment" Schema="dbo" store:Type="Tables" />
@@ -247,13 +281,32 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
     [V_Equipment].[wiring] AS [wiring]
     FROM [dbo].[V_Equipment] AS [V_Equipment]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__m_equipme__manuf__52593CB8" Association="Self.FK__m_equipme__manuf__52593CB8">
-      <End Role="m_manufacture" EntitySet="m_manufacture" />
-      <End Role="m_equipment" EntitySet="m_equipment" />
-    </AssociationSet>
-    <AssociationSet Name="FK__m_equipmen__area__5165187F" Association="Self.FK__m_equipmen__area__5165187F">
-      <End Role="m_area" EntitySet="m_area" />
-      <End Role="m_equipment" EntitySet="m_equipment" />
-    </AssociationSet>
+    <EntitySet Name="V_Equipments" EntityType="Self.V_Equipments" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [V_Equipments].[equipment_id] AS [equipment_id], 
+    [V_Equipments].[tag_no] AS [tag_no], 
+    [V_Equipments].[area_id] AS [area_id], 
+    [V_Equipments].[manufacture_id] AS [manufacture_id], 
+    [V_Equipments].[capacity] AS [capacity], 
+    [V_Equipments].[fla] AS [fla], 
+    [V_Equipments].[rpm] AS [rpm], 
+    [V_Equipments].[volt] AS [volt], 
+    [V_Equipments].[frame] AS [frame], 
+    [V_Equipments].[bearing_de] AS [bearing_de], 
+    [V_Equipments].[bearing_nde] AS [bearing_nde], 
+    [V_Equipments].[wiring_diameter] AS [wiring_diameter], 
+    [V_Equipments].[schedule_service] AS [schedule_service], 
+    [V_Equipments].[area_name] AS [area_name], 
+    [V_Equipments].[manufacture_name] AS [manufacture_name], 
+    [V_Equipments].[de] AS [de], 
+    [V_Equipments].[nde] AS [nde], 
+    [V_Equipments].[val_tag_no] AS [val_tag_no], 
+    [V_Equipments].[wiring_value] AS [wiring_value], 
+    [V_Equipments].[last_service] AS [last_service], 
+    [V_Equipments].[mttf] AS [mttf], 
+    [V_Equipments].[mttr] AS [mttr], 
+    [V_Equipments].[overdue] AS [overdue]
+    FROM [dbo].[V_Equipments] AS [V_Equipments]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
 </Schema>

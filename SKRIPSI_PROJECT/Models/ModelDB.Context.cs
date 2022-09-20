@@ -12,6 +12,8 @@ namespace SKRIPSI_PROJECT.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class db_conn : DbContext
     {
@@ -25,7 +27,6 @@ namespace SKRIPSI_PROJECT.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tn_m_equipment> tn_m_equipment { get; set; }
         public virtual DbSet<tn_m_material> tn_m_material { get; set; }
         public virtual DbSet<tn_u_login> tn_u_login { get; set; }
         public virtual DbSet<tn_users> tn_users { get; set; }
@@ -35,8 +36,36 @@ namespace SKRIPSI_PROJECT.Models
         public virtual DbSet<tn_m_area> tn_m_area { get; set; }
         public virtual DbSet<m_area> m_area { get; set; }
         public virtual DbSet<m_dropdown> m_dropdown { get; set; }
-        public virtual DbSet<m_equipment> m_equipment { get; set; }
         public virtual DbSet<m_manufacture> m_manufacture { get; set; }
         public virtual DbSet<m_material> m_material { get; set; }
+        public virtual DbSet<tn_m_equipment> tn_m_equipment { get; set; }
+        public virtual DbSet<m_equipment> m_equipment { get; set; }
+        public virtual DbSet<V_Equipments> V_Equipments { get; set; }
+        public virtual DbSet<equipment_repairment> equipment_repairment { get; set; }
+    
+        public virtual int sp_insert_repairment(Nullable<int> repair_id, Nullable<int> equipment_id, string date, string status, Nullable<int> created_by)
+        {
+            var repair_idParameter = repair_id.HasValue ?
+                new ObjectParameter("repair_id", repair_id) :
+                new ObjectParameter("repair_id", typeof(int));
+    
+            var equipment_idParameter = equipment_id.HasValue ?
+                new ObjectParameter("equipment_id", equipment_id) :
+                new ObjectParameter("equipment_id", typeof(int));
+    
+            var dateParameter = date != null ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(string));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(string));
+    
+            var created_byParameter = created_by.HasValue ?
+                new ObjectParameter("created_by", created_by) :
+                new ObjectParameter("created_by", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_repairment", repair_idParameter, equipment_idParameter, dateParameter, statusParameter, created_byParameter);
+        }
     }
 }

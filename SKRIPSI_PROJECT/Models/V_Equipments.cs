@@ -12,7 +12,7 @@ namespace SKRIPSI_PROJECT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class m_equipment
+    public partial class V_Equipments
     {
         public int equipment_id { get; set; }
         public string tag_no { get; set; }
@@ -26,12 +26,16 @@ namespace SKRIPSI_PROJECT.Models
         public Nullable<int> bearing_de { get; set; }
         public Nullable<int> bearing_nde { get; set; }
         public string wiring_diameter { get; set; }
-        public Nullable<System.DateTime> schedule_service { get; set; }
+        public string schedule_service { get; set; }
+        public string area_name { get; set; }
+        public string manufacture_name { get; set; }
+        public string de { get; set; }
+        public string nde { get; set; }
+        public string val_tag_no { get; set; }
+        public string wiring_value { get; set; }
         public string last_service { get; set; }
-        public string mttr { get; set; }
         public string mttf { get; set; }
-        public string overdue_schedule { get; set; }
-        public Nullable<int> created_by { get; set; }
-        public Nullable<System.DateTime> created_date { get; set; }
+        public string mttr { get; set; }
+        public string overdue { get; set; }
     }
 }

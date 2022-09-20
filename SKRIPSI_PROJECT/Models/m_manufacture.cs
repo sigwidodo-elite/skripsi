@@ -14,19 +14,10 @@ namespace SKRIPSI_PROJECT.Models
     
     public partial class m_manufacture
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public m_manufacture()
-        {
-            this.m_equipment = new HashSet<m_equipment>();
-        }
-    
         public int manufacture_id { get; set; }
         public string manufacture_name { get; set; }
         public string status { get; set; }
         public Nullable<int> created_by { get; set; }
         public Nullable<System.DateTime> created_date { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<m_equipment> m_equipment { get; set; }
     }
 }

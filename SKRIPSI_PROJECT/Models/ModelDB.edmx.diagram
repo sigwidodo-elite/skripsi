@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5b79cc23640941a7a9d8d8bf6e17450c" Name="Diagram1">
-        <EntityTypeShape EntityType="DB_SKRIPSIModel.tn_m_equipment" PointX="3" PointY="1" Width="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_SKRIPSIModel.tn_m_material" PointX="7.75" PointY="4.75" Width="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_SKRIPSIModel.tn_u_login" PointX="8.375" PointY="0.75" Width="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DB_SKRIPSIModel.tn_users" PointX="2.75" PointY="6.75" Width="1.5" IsExpanded="true" />
@@ -15,12 +14,13 @@
         <EntityTypeShape EntityType="DB_SKRIPSIModel.tn_m_area" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="DB_SKRIPSIModel.m_area" Width="1.5" PointX="9.375" PointY="13.125" />
         <EntityTypeShape EntityType="DB_SKRIPSIModel.m_dropdown" Width="1.5" PointX="3.375" PointY="9.75" />
-        <EntityTypeShape EntityType="DB_SKRIPSIModel.m_equipment" Width="1.5" PointX="11.625" PointY="9" />
         <EntityTypeShape EntityType="DB_SKRIPSIModel.m_manufacture" Width="1.5" PointX="9.375" PointY="10.125" />
         <EntityTypeShape EntityType="DB_SKRIPSIModel.m_material" Width="1.5" PointX="10.375" PointY="0.75" />
-        <AssociationConnector Association="DB_SKRIPSIModel.FK__m_equipmen__area__5165187F" />
-        <AssociationConnector Association="DB_SKRIPSIModel.FK__m_equipme__manuf__52593CB8" />
-      </Diagram>
+        <EntityTypeShape EntityType="DB_SKRIPSIModel.tn_m_equipment" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_SKRIPSIModel.m_equipment" Width="1.5" PointX="11.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DB_SKRIPSIModel.V_Equipments" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="DB_SKRIPSIModel.equipment_repairment" Width="1.5" PointX="11.375" PointY="10.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

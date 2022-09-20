@@ -12,12 +12,17 @@ namespace SKRIPSI_PROJECT.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class m_area
+    public partial class equipment_repairment
     {
-        public int area_id { get; set; }
-        public string area_name { get; set; }
+        public int equip_history_id { get; set; }
+        public Nullable<int> equipment_id { get; set; }
+        public string start_date { get; set; }
+        public string end_date { get; set; }
+        public Nullable<int> duration { get; set; }
         public string status { get; set; }
         public Nullable<int> created_by { get; set; }
         public Nullable<System.DateTime> created_date { get; set; }
+        public Nullable<int> updated_by { get; set; }
+        public Nullable<System.DateTime> updated_date { get; set; }
     }
 }
