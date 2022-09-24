@@ -18,6 +18,7 @@ namespace SKRIPSI_PROJECT.Models
         public Nullable<int> equipment_id { get; set; }
         public string start_date { get; set; }
         public string end_date { get; set; }
+        public Nullable<int> operation_time { get; set; }
         public Nullable<int> duration { get; set; }
         public string status { get; set; }
         public Nullable<int> created_by { get; set; }

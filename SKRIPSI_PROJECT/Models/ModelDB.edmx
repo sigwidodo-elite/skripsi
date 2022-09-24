@@ -13,6 +13,7 @@
           <Property Name="equipment_id" Type="int" />
           <Property Name="start_date" Type="varchar" MaxLength="25" />
           <Property Name="end_date" Type="varchar" MaxLength="25" />
+          <Property Name="operation_time" Type="int" />
           <Property Name="duration" Type="int" />
           <Property Name="status" Type="varchar" MaxLength="50" />
           <Property Name="created_by" Type="int" />
@@ -367,7 +368,6 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
           <EntitySet Name="tn_m_equipment" EntityType="DB_SKRIPSIModel.tn_m_equipment" />
           <EntitySet Name="m_equipment" EntityType="DB_SKRIPSIModel.m_equipment" />
           <EntitySet Name="V_Equipments" EntityType="DB_SKRIPSIModel.V_Equipments" />
-          <EntitySet Name="equipment_repairment" EntityType="DB_SKRIPSIModel.equipment_repairment" />
           <FunctionImport Name="sp_insert_repairment">
             <Parameter Name="repair_id" Mode="In" Type="Int32" />
             <Parameter Name="equipment_id" Mode="In" Type="Int32" />
@@ -375,6 +375,7 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
             <Parameter Name="status" Mode="In" Type="String" />
             <Parameter Name="created_by" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="equipment_repairment" EntityType="DB_SKRIPSIModel.equipment_repairment" />
           </EntityContainer>
         <EntityType Name="tn_m_dropdown">
           <Key>
@@ -560,6 +561,7 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
           <Property Name="equipment_id" Type="Int32" />
           <Property Name="start_date" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="end_date" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="operation_time" Type="Int32" />
           <Property Name="duration" Type="Int32" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="created_by" Type="Int32" />
@@ -796,6 +798,7 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_insert_repairment" FunctionName="DB_SKRIPSIModel.Store.sp_insert_repairment" />
           <EntitySetMapping Name="equipment_repairment">
             <EntityTypeMapping TypeName="DB_SKRIPSIModel.equipment_repairment">
               <MappingFragment StoreEntitySet="equipment_repairment">
@@ -805,6 +808,7 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
                 <ScalarProperty Name="created_by" ColumnName="created_by" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="operation_time" ColumnName="operation_time" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
@@ -812,7 +816,6 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_insert_repairment" FunctionName="DB_SKRIPSIModel.Store.sp_insert_repairment" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

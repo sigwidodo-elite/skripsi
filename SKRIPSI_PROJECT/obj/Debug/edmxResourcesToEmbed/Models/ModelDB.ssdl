@@ -8,6 +8,7 @@
     <Property Name="equipment_id" Type="int" />
     <Property Name="start_date" Type="varchar" MaxLength="25" />
     <Property Name="end_date" Type="varchar" MaxLength="25" />
+    <Property Name="operation_time" Type="int" />
     <Property Name="duration" Type="int" />
     <Property Name="status" Type="varchar" MaxLength="50" />
     <Property Name="created_by" Type="int" />

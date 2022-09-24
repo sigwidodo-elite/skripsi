@@ -224,6 +224,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_insert_repairment" FunctionName="DB_SKRIPSIModel.Store.sp_insert_repairment" />
     <EntitySetMapping Name="equipment_repairment">
       <EntityTypeMapping TypeName="DB_SKRIPSIModel.equipment_repairment">
         <MappingFragment StoreEntitySet="equipment_repairment">
@@ -233,6 +234,7 @@
           <ScalarProperty Name="created_by" ColumnName="created_by" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="operation_time" ColumnName="operation_time" />
           <ScalarProperty Name="end_date" ColumnName="end_date" />
           <ScalarProperty Name="start_date" ColumnName="start_date" />
           <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
@@ -240,6 +242,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_insert_repairment" FunctionName="DB_SKRIPSIModel.Store.sp_insert_repairment" />
   </EntityContainerMapping>
 </Mapping>

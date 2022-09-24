@@ -49,7 +49,6 @@
     <EntitySet Name="tn_m_equipment" EntityType="DB_SKRIPSIModel.tn_m_equipment" />
     <EntitySet Name="m_equipment" EntityType="DB_SKRIPSIModel.m_equipment" />
     <EntitySet Name="V_Equipments" EntityType="DB_SKRIPSIModel.V_Equipments" />
-    <EntitySet Name="equipment_repairment" EntityType="DB_SKRIPSIModel.equipment_repairment" />
     <FunctionImport Name="sp_insert_repairment">
       <Parameter Name="repair_id" Mode="In" Type="Int32" />
       <Parameter Name="equipment_id" Mode="In" Type="Int32" />
@@ -57,6 +56,7 @@
       <Parameter Name="status" Mode="In" Type="String" />
       <Parameter Name="created_by" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="equipment_repairment" EntityType="DB_SKRIPSIModel.equipment_repairment" />
   </EntityContainer>
   <EntityType Name="tn_m_dropdown">
     <Key>
@@ -242,6 +242,7 @@
     <Property Name="equipment_id" Type="Int32" />
     <Property Name="start_date" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="end_date" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="operation_time" Type="Int32" />
     <Property Name="duration" Type="Int32" />
     <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="created_by" Type="Int32" />

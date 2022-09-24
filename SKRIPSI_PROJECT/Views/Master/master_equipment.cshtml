@@ -405,7 +405,7 @@
                 <button class="close" data-close="alert"></button> Ada beberapa kolom yang belum terisi, silahkan cek kembali
             </div>
             <div class="modal-body">
-                <input type="hidden" id="txtequipid" class="form-control" />
+                <input type="hidden" id="txtrepairid" class="form-control" />
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
                         <label class="control-label col-md-3">Tanggal Perbaikan</label>
@@ -475,7 +475,6 @@
                     {
                         "mData": function (data, row) {
                             return '<a class="btn bg-red-thunderbird bg-font-red-thunderbird edit-status-equipment" href="javascript:;">EDIT</a><br/>' +
-                                '<a class="btn bg-red-thunderbird bg-font-red-thunderbird delete-status-equipment" href="javascript:;">HAPUS</a><br/>' +
                                 '<a class="btn bg-red-thunderbird bg-font-red-thunderbird detail-status-equipment" href="javascript:;">DETAIL</a>';
                         }
                     },
@@ -544,8 +543,16 @@
         $(document).on('click', '.btn-finish-equipment', function (e) {
             var oTable = $('#table_history').dataTable();
             var id = oTable.fnGetData($(this).parent().parent(), 0);
+            var equipid = oTable.fnGetData($(this).parent().parent(), 1);
+            $('#txtrepairid').val(id);
+            $('#txtequipid').val(equipid);
             $('#form_finish_repairment').modal('show');
           /*  confirmFinish();*/
+        });
+
+        /* BTN MODAL MASTER equipment */
+        $(document).on('click', '#btn-finish-repairment', function (e) {
+            confirmFinish();
         });
 
         /* BTN MODAL MASTER equipment */
@@ -683,6 +690,7 @@
                             type: "success"
                         }, function () {
                             initRepairment();
+                           
                         });
                     }
                     if (result == false) {
@@ -759,9 +767,10 @@
                     });
 
                     var repairment = new FormData();
-                    repairment.append('start_date', $('#txtRepairDate').val());
+                    repairment.append('start_date', $('#txtFinishDate').val());
+                    repairment.append("equip_history_id", $('#txtrepairid').val());
                     repairment.append("equipment_id", $('#txtequipid').val());
-                    repairment.append("status", 'PROCESS');
+                    repairment.append("status", 'FINISH');
 
                     // DO POST
                     $.ajax({
@@ -795,6 +804,19 @@
                                     type: "success"
                                 }, function () {
                                     initRepairment();
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "/master/getdetailequipment?id=" + $('#txtequipid').val(),
+                                        success: function (x) {
+                                            alert(x.mttr);
+                                            $('#txtMttr').val(x.mttr);
+                                            $('#txtMttf').val(x.mttf);
+                                            $('#txtOverdue').val(x.overdue);
+                                        },
+                                        error: function (e) {
+                                            swal("Error!", "", "error");
+                                        }
+                                    });
                                 });
                             }
                             if (result == false) {
