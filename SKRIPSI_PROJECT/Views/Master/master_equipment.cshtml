@@ -53,7 +53,7 @@
                                         <th> FRAME </th>
                                         <th> DE </th>
                                         <th> NDE </th>
-                                        <th> WIRING </th>
+                                        <th> WINDING </th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -70,7 +70,7 @@
 <div id="modal-master-equipment" class="modal fade" data-width="760" data-backdrop="static" tabindex="-1">
     <div class="modal-header bg-red-thunderbird bg-font-red-thunderbird">
         <button type="button" class="close cancel" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">DATA equipment</h4>
+        <h4 class="modal-title">Data Equipment</h4>
     </div>
     <form action="#" id="form_master_equipment" class="form-horizontal">
         <div class="form-body">
@@ -285,7 +285,7 @@
                 </div>
                 <div class="row wiring" style="margin-bottom: -5px;">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Wiring</label>
+                        <label class="control-label col-md-3">Winding</label>
                         <div class="col-md-9" style="padding-right: 40px; !important;">
                             @{
                                 List<SelectListItem> listWiring = new List<SelectListItem>();
@@ -356,7 +356,7 @@
                         <div class="col-md-2" style="padding-right: 40px; !important;">
                             <input type="text" id="txtMttr" maxlength="100" name="area" class="form-control" disabled/>
                         </div>
-                        <label class="control-label col-md-1">MTTF</label>
+                        <label class="control-label col-md-1">MTBF</label>
                         <div class="col-md-2" style="padding-right: 40px; !important;">
                             <input type="text" id="txtMttf" maxlength="100" name="area" class="form-control" disabled/>
                         </div>
@@ -406,9 +406,10 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="txtrepairid" class="form-control" />
+                <input type="hidden" id="txtstartdate" class="form-control" />
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Tanggal Perbaikan</label>
+                        <label class="control-label col-md-3">Selesai Perbaikan</label>
                         <div class="col-md-6" style="padding-right: 40px; !important;">
                             <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
                                 <input type="text" id="txtFinishDate" name="birthdate" class="form-control" readonly />
@@ -544,15 +545,34 @@
             var oTable = $('#table_history').dataTable();
             var id = oTable.fnGetData($(this).parent().parent(), 0);
             var equipid = oTable.fnGetData($(this).parent().parent(), 1);
+            var startDate = oTable.fnGetData($(this).parent().parent(), 2);
             $('#txtrepairid').val(id);
             $('#txtequipid').val(equipid);
+            $('#txtstartdate').val(startDate);
             $('#form_finish_repairment').modal('show');
           /*  confirmFinish();*/
         });
 
         /* BTN MODAL MASTER equipment */
         $(document).on('click', '#btn-finish-repairment', function (e) {
-            confirmFinish();
+            var dateFrom = $('#txtstartdate').val();
+            var dateTo = $('#txtFinishDate').val();
+
+            var d1 = dateFrom.split("-");
+            var d2 = dateTo.split("-");
+
+            var from = new Date(d1[2], parseInt(d1[1]) - 1, d1[0]);  // -1 because months are from 0 to 11
+            var to = new Date(d2[2], parseInt(d2[1]) - 1, d2[0]);
+            if (dateTo == '') {
+                swal("Tanggal selesai tidak boleh kosong");
+            }
+            if (from > to) {
+                swal("Tanggal selesai perbaikan tidak boleh kurang dari tanggal mulai perbaikan " + dateFrom);
+            } 
+            else {
+                confirmFinish();
+            }
+            
         });
 
         /* BTN MODAL MASTER equipment */
@@ -808,7 +828,6 @@
                                         type: "GET",
                                         url: "/master/getdetailequipment?id=" + $('#txtequipid').val(),
                                         success: function (x) {
-                                            alert(x.mttr);
                                             $('#txtMttr').val(x.mttr);
                                             $('#txtMttf').val(x.mttf);
                                             $('#txtOverdue').val(x.overdue);
@@ -923,15 +942,11 @@
         /* BTN SUBMIT MASTER equipment */
         $(document).on("click", "#btn-add-repairment", function (e) {
 
-            if ($('#form_repairment').validate().form()) {
-                App.blockUI({
-                    boxed: true
-                });
-
+            if ($('#txtRepairDate').val() == '') {
+                swal("Tanggal mulai perbaikan tidak boleh kosong");
+            } else {
                 confirmSaveequipmentRepair();
-
             }
-
         });
 
         /* BTN EDIT STATUS MASTER equipment */
@@ -968,7 +983,6 @@
                 type: "GET",
                 url: "/master/getdetailequipment?id=" + id,
                 success: function (result) {
-                    alert(result.tag_no);
                     $('#txtTagNo').val(result.tag_no);
                     $('#txtArea').val(result.area_id);
                     $('#txtManufacture').val(result.manufacture_id);

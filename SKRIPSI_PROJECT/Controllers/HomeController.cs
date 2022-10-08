@@ -25,7 +25,7 @@ namespace SKRIPSI_PROJECT.Controllers
             }
 
             tn_u_login user = (tn_u_login)Session["sessionUser"];
-            return View(user);
+            return RedirectToAction("Equipment", "Master");
         }
 
         public ActionResult SignOut()
