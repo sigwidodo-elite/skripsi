@@ -41,6 +41,7 @@
                                         <th colspan="3" style="text-align:center"> MATERIAL </th>
                                         <th rowspan="2"> MTTR </th>
                                         <th rowspan="2"> MTTF </th>
+                                        <th rowspan="2"> SCHEDULE SERVICE </th>
                                         <th rowspan="2"> OVERDUE </th>
                                         <th rowspan="2"> LAST SERVICE </th>
                                         <th rowspan="2" width="10%"> ACTION</th>
@@ -476,16 +477,18 @@
                     { "mDataProp": "wiring_value" },
                     { "mDataProp": "mttr" },
                     { "mDataProp": "mttf" },
+                    { "mDataProp": "schedule_service" },
                     { "mDataProp": "overdue" },
-                    {
-                        "mData": function (data, row) {
-                            if (data.last_service == '' || data.last_service == null) {
-                                return data.schedule_service
-                            } else {
-                                return data.last_service
-                            }
-                        }
-                    },
+                    { "mDataProp": "last_service" },
+                    //{
+                    //    "mData": function (data, row) {
+                    //        if (data.last_service == '' || data.last_service == null) {
+                    //            return data.schedule_service
+                    //        } else {
+                    //            return data.last_service
+                    //        }
+                    //    }
+                    //},
                     {
                         "mData": function (data, row) {
                             return '<a class="btn bg-red-thunderbird bg-font-red-thunderbird edit-status-equipment" href="javascript:;">EDIT</a><br/>' +
