@@ -4292,6 +4292,7 @@
     <Content Include="Views\Users\users.cshtml" />
     <Content Include="Views\Home\login.cshtml" />
     <Content Include="Views\Master\equipment_service.cshtml" />
+    <Content Include="Views\Master\master_user.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

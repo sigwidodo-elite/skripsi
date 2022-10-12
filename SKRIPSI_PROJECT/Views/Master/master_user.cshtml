@@ -18,24 +18,22 @@
                         <div class="portlet-title tabbable-line">
                             <div class="caption caption-md">
                                 <i class="icon-globe theme-font hide"></i>
-                                <span class="caption-subject bold uppercase font-dark">Data Material</span>
+                                <span class="caption-subject bold uppercase font-dark">Data User</span>
                             </div>
                             <div class="actions">
                                 <div class="btn-group-devided" data-toggle="buttons">
-                                    <button style="margin-right: 10px;" id="btn-add-material-modal" class="btn bg-red-thunderbird bg-font-red-thunderbird">
+                                    <button style="margin-right: 10px;" id="btn-add-user-modal" class="btn bg-red-thunderbird bg-font-red-thunderbird">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <div class="portlet-body">
-                            <table class="table table-striped table-hover table-bordered" id="table_material">
+                            <table class="table table-striped table-hover table-bordered" id="table_user">
                                 <thead>
                                     <tr class="bg-red-thunderbird bg-font-red-thunderbird">
                                         <th style="display:none;"> id </th>
-                                        <th> NAMA MATERIAL </th>
-                                        <th> TIPE MATERIAL </th>
-                                        <th> BAHAN MATERIAL </th>
+                                        <th> NAMA USER </th>
                                         <th width="30%"></th>
                                     </tr>
                                 </thead>
@@ -50,60 +48,38 @@
     </div>
 </div>
 
-<div id="modal-master-material" class="modal fade" data-width="760" data-backdrop="static" tabindex="-1">
+<div id="modal-master-user" class="modal fade" data-width="760" data-backdrop="static" tabindex="-1">
     <div class="modal-header bg-red-thunderbird bg-font-red-thunderbird">
         <button type="button" class="close cancel" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">DATA MATERIAL</h4>
+        <h4 class="modal-title">DATA USER</h4>
     </div>
-    <form action="#" id="form_master_material" class="form-horizontal">
+    <form action="#" id="form_master_user" class="form-horizontal">
         <div class="form-body">
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button> Ada beberapa kolom yang belum terisi, silahkan cek kembali
             </div>
             <div class="modal-body">
-                <input type="hidden" id="txtmaterialid" class="form-control" />
+                <input type="hidden" id="txtuserid" class="form-control" />
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Jenis Material<span class="required"> * </span></label>
+                        <label class="control-label col-md-3">Nama user<span class="required"> * </span></label>
                         <div class="col-md-9" style="padding-right: 40px; !important;">
-                            <label class="mt-radio" style="padding-right: 10px; !important;">
-                                <input type="radio" name="materialType" value="BEARING" class="radio-material" /> Bearing
-                                <span></span>
-                            </label>
-                            <label class="mt-radio">
-                                <input type="radio" name="materialType" value="WIRING" class="radio-material" /> Wiring
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row bearing" style="margin-bottom: -5px;">
-                    <div class="form-group">
-                        <label class="control-label col-md-3">Tipe Bearing<span class="required"> * </span></label>
-                        <div class="col-md-9" style="padding-right: 40px; !important;">
-                            <label class="mt-radio" style="padding-right: 10px; !important;">
-                                <input type="radio" name="bearingType" value="DE" class="radio-bearing-type" checked /> DE
-                                <span></span>
-                            </label>
-                            <label class="mt-radio">
-                                <input type="radio" name="bearingType" value="NDE" class="radio-bearing-type" /> NDE
-                                <span></span>
-                            </label>
+                            <input type="text" id="txtnamauser" placeholder="User ID" maxlength="100" name="user" class="form-control" />
                         </div>
                     </div>
                 </div>
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
-                        <label class="control-label col-md-3">Diameter<span class="required"> * </span></label>
+                        <label class="control-label col-md-3">Nama user<span class="required"> * </span></label>
                         <div class="col-md-9" style="padding-right: 40px; !important;">
-                            <input type="text" id="txtnamamaterial" maxlength="100" name="material" class="form-control" />
+                            <input type="password" id="txtpassword" placeholder="Password" maxlength="100" name="user" class="form-control" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn cancel btn-outline dark">Batal</button>
-                <button type="button" class="btn red-thunderbird" id="btn-add-material">Submit</button>
+                <button type="button" class="btn red-thunderbird" id="btn-add-user">Submit</button>
             </div>
         </div>
     </form>
@@ -117,13 +93,13 @@
 
         // BEGIN OPEN ACTIVE MENU
         $('#master-menu').addClass('active ');
-        $('#master-material-menu').addClass('active');
+        $('#master-user-menu').addClass('active');
 
 
-        /* INIT TABLE MASTER material */
+        /* INIT TABLE MASTER user */
         function initData() {
 
-            var tableDocument =$('#table_material').DataTable({
+            var tableDocument =$('#table_user').DataTable({
                 "bJQueryUI": true,
                 "destroy": true,
                 "bProcessing": true,
@@ -133,17 +109,19 @@
                 "paging": true,
                 "autoWidth": false,
                 "ordering": false,
-                "sAjaxSource": '/master/getlistmaterial',
+                "sAjaxSource": '/users/getlistuser',
                 "sAjaxDataProp": "",
                 "aoColumns": [
-                    { "mDataProp": "material_id", "visible": false, "searchable": true, "targets": [0] },
-                    { "mDataProp": "material_value" },
-                    { "mDataProp": "material_type" },
-                    { "mDataProp": "material_ing" },
+                    { "mDataProp": "u_id", "visible": false, "searchable": true, "targets": [0] },
+                    { "mDataProp": "u_name" },
                     {
                         "mData": function (data, row) {
-                            return '<a class="btn bg-red-thunderbird bg-font-red-thunderbird edit-status-material" href="javascript:;">EDIT</a>' +
-                            '<a class="btn bg-red-thunderbird bg-font-red-thunderbird delete-status-material" href="javascript:;">HAPUS</a>' ;
+                            if (data.u_role != 'ADMIN') {
+                                return '<a class="btn bg-red-thunderbird bg-font-red-thunderbird delete-status-user" href="javascript:;">HAPUS</a>';
+                            }
+                            else {
+                                return '';
+                            }
                         }
                     }
                 ]
@@ -155,69 +133,49 @@
         initData();
 
 
-        /* BTN MODAL MASTER material */
-        $(document).on('click', '#btn-add-material-modal', function (e) {
+        /* BTN MODAL MASTER user */
+        $(document).on('click', '#btn-add-user-modal', function (e) {
 
-            $('#form_master_material')[0].reset();
-            $('#txtmaterialId').val('');
-            $('#form_master_material .form-control').val('');
+            $('#form_master_user')[0].reset();
+            $('#txtuserId').val('');
+            $('#form_master_user .form-control').val('');
             $('.has-error').removeClass('has-error');
             $('.fa-warning').removeClass('fa-warning');
             $('.has-success').removeClass('has-success');
             $('.fa-check').removeClass('fa-check');
             $('.alert-danger').hide();
-            $("input[value='BEARING']").attr('checked', true);
-            var tkStatus = $("input[name='materialType']:checked").val();
-
-            if (tkStatus == 'BEARING') {
-                $('.bearing').show();
-                $('#txtnamamaterial').parent().siblings().eq(0).text('Nama Bearing')
-            } else {
-                $('.bearing').hide();
-                $('#txtnamamaterial').parent().siblings().eq(0).text('Diameter')
-            }
-
-            $('#modal-master-material').modal('show');
+            $('#modal-master-user').modal('show');
 
         });
 
 
-        /* SAVE MASTER material */
-        function savematerial() {
+        /* SAVE MASTER user */
+        function saveuser() {
 
-            var substance = $("input[name='materialType']:checked").val();
-            var typeBearing = $("input[name='bearingType']:checked").val();
-
-            var materi = new FormData();
-            materi.append('material_value', $('#txtnamamaterial').val());
-            materi.append('material_ing', substance);
-            if (substance == 'BEARING') {
-                materi.append('material_type', typeBearing);
-            }
-            else {
-                materi.append('material_type', 'DIAMETER');
-            }
-            materi.append('status', 'ACTIVE');
-            materi.append("material_id", $('#txtmaterialid').val());
+            var usr = new FormData();
+            usr.append('u_name', $('#txtnamauser').val());
+            usr.append('u_password', $('#txtpassword').val());
+            usr.append('status', 'ACTIVE');
+            usr.append('u_role', 'USER');
 
             // DO POST
             $.ajax({
                 type: "POST",
-                url: "/master/savematerial",
-                data: materi,
+                url: "/users/saveuser",
+                data: usr,
                 contentType: false,
                 processData: false,
                 success: function (result) {
                     App.unblockUI();
-                    $('#form_master_material')[0].reset();
-                    $('#txtmaterialid').val('');
-                    $('#form_master_material .form-control').val('');
+                    $('#form_master_user')[0].reset();
+                    $('#txtuserid').val('');
+                    $('#form_master_user .form-control').val('');
                     $('.has-error').removeClass('has-error');
                     $('.fa-warning').removeClass('fa-warning');
                     $('.has-success').removeClass('has-success');
                     $('.fa-check').removeClass('fa-check');
                     $('.alert-danger').hide();
-                    $('#modal-master-material').modal('hide');
+                    $('#modal-master-user').modal('hide');
                     if (result == "timeout") {
                         swal({
                             title: "Session Habis!",
@@ -260,8 +218,8 @@
 
 
 
-        /* CONFIRM SAVE MASTER material */
-        function confirmSavematerial() {
+        /* CONFIRM SAVE MASTER user */
+        function confirmSaveuser() {
             swal({
                 title: "Konfirmasi Data",
                 text: "Apa Anda Yakin Data Ingin Disimpan ?",
@@ -280,7 +238,7 @@
                         boxed: true
                     });
 
-                    savematerial();
+                    saveuser();
 
                 } else {
                     App.unblockUI();
@@ -290,83 +248,39 @@
         }
 
 
-       
-        /* BTN SUBMIT MASTER material */
-        $(document).on("click", "#btn-add-material", function (e) {
+        /* BTN SUBMIT MASTER user */
+        $(document).on("click", "#btn-add-user", function (e) {
 
-            if ($('#txtnamamaterial').val() == '') {
-                swal("Nama Material tidak boleh kosong");
+            if ($('#txtnamauser').val() == '') {
+                swal("Nama user tidak boleh kosong");
+            }
+            else if ($('#txtpassword').val() == '') {
+                swal("Password tidak boleh kosong");
             }
             else {
-                confirmSavematerial();
+                confirmSaveuser();
             }
         });
 
-         /* BTN EDIT STATUS MASTER material */
-        $(document).on("click", ".edit-status-material", function (e) {
-            var oTable = $('#table_material').dataTable();
+
+        /* BTN DELETE MASTER user */
+        $(document).on("click", ".delete-status-user", function (e) {
+            var oTable = $('#table_user').dataTable();
             var id = oTable.fnGetData($(this).parent().parent(), 0);
 
             App.blockUI({
                 boxed: true
             });
 
-            getDetailmaterial(id);
+            confirmDeleteuser(id);
 
         });
 
-
-        /* BTN DELETE MASTER material */
-        $(document).on("click", ".delete-status-material", function (e) {
-            var oTable = $('#table_material').dataTable();
-            var id = oTable.fnGetData($(this).parent().parent(), 0);
-
-            App.blockUI({
-                boxed: true
-            });
-
-            confirmDeletematerial(id);
-
-        });
-
-
-        /* GET DETAIL MASTER material */
-        function getDetailmaterial(id) {
-            $.ajax({
-                type: "GET",
-                url: "/master/getdetailmaterial/" + id,
-                success: function (result) {
-                    $('#txtmaterialid').val(result.material_id);
-                    var tkStatus = result.material_ing;
-
-                    if (tkStatus == 'BEARING') {
-                        $('.bearing').show();
-                        $('#txtnamamaterial').parent().siblings().eq(0).text('Nama Bearing')
-                    } else {
-                        $('.bearing').hide();
-                        $('#txtnamamaterial').parent().siblings().eq(0).text('Diameter')
-                    }
-                    $('#txtnamamaterial').val(result.material_value);
-                    $('input.radio-material[value="' + result.material_type + '"]').prop('checked', true);
-                    $('input.radio-material[value="' + result.material_ing + '"]').prop('checked', true);
-                    $('#btn-add-material').text('Ubah');
-                    $('#modal-master-material').modal('show');
-
-                    App.unblockUI();
-                },
-                error: function (e) {
-                    swal("Error!", "", "error");
-                }
-            });
-
-        }
-
-
-        /* DELETE MASTER material */
-        function deletematerial(id) {
+        /* DELETE MASTER user */
+        function deleteuser(id) {
             $.ajax({
                 type: "POST",
-                url: "/master/deletematerial/" + id,
+                url: "/users/deleteuser/" + id,
                 success: function (result) {
                     App.unblockUI();
                     if (result == "timeout") {
@@ -405,8 +319,8 @@
         }
 
 
-        /* CONFIRM DELETE MASTER material */
-        function confirmDeletematerial(id) {
+        /* CONFIRM DELETE MASTER user */
+        function confirmDeleteuser(id) {
             swal({
                 title: "Konfirmasi Data",
                 text: "Apa Anda Yakin Data Ingin Dihapus ?",
@@ -425,7 +339,7 @@
                         boxed: true
                     });
 
-                    deletematerial(id);
+                    deleteuser(id);
 
                 } else {
                      App.unblockUI();
@@ -433,24 +347,6 @@
                 }
             });
         }
-
-        /*$('.bearing').hide();*/
-        $('.wiring').hide();
-
-        /* change status bpjs ketenagakerjaan */
-        $(document).on("click", ".radio-material", function (e) {
-
-            var tkStatus = $("input[name='materialType']:checked").val();
-
-            if (tkStatus == 'BEARING') {
-                $('.bearing').show();
-                $('#txtnamamaterial').parent().siblings().eq(0).text('Nama Bearing');
-            } else {
-                $('.bearing').hide();
-                $('#txtnamamaterial').parent().siblings().eq(0).text('Diameter');
-            }
-
-        });
 
     });
 </script>

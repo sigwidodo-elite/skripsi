@@ -270,15 +270,12 @@
         /* BTN SUBMIT MASTER area */
         $(document).on("click", "#btn-add-area", function (e) {
 
-            if ($('#form_master_area').validate().form()) {
-                App.blockUI({
-                    boxed: true
-                });
-
-               confirmSavearea();
-               
+            if ($('#txtnamaarea').val() == '') {
+                swal("Nama area tidak boleh kosong");
             }
-
+            else {
+                confirmSavearea();
+            }
         });
 
          /* BTN EDIT STATUS MASTER area */

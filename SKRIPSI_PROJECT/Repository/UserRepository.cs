@@ -35,7 +35,20 @@ namespace SKRIPSI_PROJECT.Repository
 
         public List<tn_u_login> GetUserLogin()
         {
-            return _conn.tn_u_login.ToList();
+            List<tn_u_login> listUser = new List<tn_u_login>();
+
+            try
+            {
+                _conn = new db_conn();
+                listUser = _conn.tn_u_login.ToList();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return listUser;
         }
 
         public tn_u_login GetUsers(string uName)
@@ -57,13 +70,43 @@ namespace SKRIPSI_PROJECT.Repository
         {
             try
             {
-
+                _conn = new db_conn();
+                uLogin.u_password = Encryption.Encrypt(uLogin.u_name, uLogin.u_password);
+                uLogin.created_date = DateTime.Now;
+                _conn.tn_u_login.Add(uLogin);
+                _conn.SaveChanges();
             }
             catch (SqlException ex)
-            { 
-            
+            {
+                return false;
             }
+
             return true;
+        }
+
+        public bool DeleteUser(int? id)
+        {
+
+            try
+            {
+
+                _conn = new db_conn();
+                tn_u_login eth = _conn.tn_u_login.Single(m => m.u_id == id);
+                _conn.tn_u_login.Remove(eth);
+                _conn.SaveChanges();
+
+            }
+            catch (SqlException e)
+            {
+
+                Console.WriteLine(e);
+                return false;
+                throw;
+
+            }
+
+            return true;
+
         }
     }
 }

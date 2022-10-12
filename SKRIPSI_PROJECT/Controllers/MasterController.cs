@@ -18,7 +18,7 @@ namespace SKRIPSI_PROJECT.Controllers
         {
             if (Session["sessionUser"] == null)
             {
-                return RedirectToAction("signout");
+                return RedirectToAction("signout", "Home");
             }
 
             tn_u_login user = (tn_u_login)Session["sessionUser"];
@@ -105,7 +105,7 @@ namespace SKRIPSI_PROJECT.Controllers
         {
             if (Session["sessionUser"] == null)
             {
-                return RedirectToAction("signout");
+                return RedirectToAction("signout", "Home");
             }
 
             tn_u_login user = (tn_u_login)Session["sessionUser"];
@@ -192,7 +192,7 @@ namespace SKRIPSI_PROJECT.Controllers
         {
             if (Session["sessionUser"] == null)
             {
-                return RedirectToAction("signout");
+                return RedirectToAction("signout", "Home");
             }
 
             tn_u_login user = (tn_u_login)Session["sessionUser"];
@@ -279,7 +279,7 @@ namespace SKRIPSI_PROJECT.Controllers
         {
             if (Session["sessionUser"] == null)
             {
-                return RedirectToAction("signout");
+                return RedirectToAction("signout", "Home");
             }
             Helper helper = new Helper();
             helper.listArea = masterRepository.GetlistArea();
