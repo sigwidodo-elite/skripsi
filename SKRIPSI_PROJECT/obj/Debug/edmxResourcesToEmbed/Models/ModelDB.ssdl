@@ -166,7 +166,7 @@
     <Property Name="role" Type="varchar" MaxLength="255" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'db_skripsi.dbo.V_Equipment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_Equipment">
     <Key>
       <PropertyRef Name="m_equip_id" />
@@ -200,7 +200,7 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
     <Property Name="wiring" Type="varchar" MaxLength="255" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'db_skripsi.dbo.V_Equipments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_Equipments">
     <Key>
       <PropertyRef Name="equipment_id" />
@@ -228,7 +228,8 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
     <Property Name="last_service" Type="varchar" MaxLength="20" />
     <Property Name="mttf" Type="varchar" MaxLength="50" />
     <Property Name="mttr" Type="varchar" MaxLength="50" />
-    <Property Name="overdue" Type="varchar" MaxLength="7" Nullable="false" />
+    <Property Name="overdue" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="created_date" Type="varchar" MaxLength="20" />
   </EntityType>
   <Function Name="sp_insert_repairment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="repair_id" Type="int" Mode="In" />
@@ -306,7 +307,8 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
     [V_Equipments].[last_service] AS [last_service], 
     [V_Equipments].[mttf] AS [mttf], 
     [V_Equipments].[mttr] AS [mttr], 
-    [V_Equipments].[overdue] AS [overdue]
+    [V_Equipments].[overdue] AS [overdue], 
+    [V_Equipments].[created_date] AS [created_date]
     FROM [dbo].[V_Equipments] AS [V_Equipments]</DefiningQuery>
     </EntitySet>
   </EntityContainer>

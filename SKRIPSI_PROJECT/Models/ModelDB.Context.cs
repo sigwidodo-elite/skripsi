@@ -40,8 +40,8 @@ namespace SKRIPSI_PROJECT.Models
         public virtual DbSet<m_material> m_material { get; set; }
         public virtual DbSet<tn_m_equipment> tn_m_equipment { get; set; }
         public virtual DbSet<m_equipment> m_equipment { get; set; }
-        public virtual DbSet<V_Equipments> V_Equipments { get; set; }
         public virtual DbSet<equipment_repairment> equipment_repairment { get; set; }
+        public virtual DbSet<V_Equipments> V_Equipments { get; set; }
     
         public virtual int sp_insert_repairment(Nullable<int> repair_id, Nullable<int> equipment_id, string date, string status, Nullable<int> created_by)
         {

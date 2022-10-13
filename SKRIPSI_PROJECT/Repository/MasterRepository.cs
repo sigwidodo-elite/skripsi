@@ -484,7 +484,7 @@ namespace SKRIPSI_PROJECT.Repository
             try
             {
                 _conn = new db_conn();
-                list = _conn.V_Equipments.ToList();
+                list = _conn.V_Equipments.OrderBy(m => m.area_name).ToList();
             }
             catch (SqlException e)
             {

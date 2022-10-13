@@ -37,5 +37,6 @@ namespace SKRIPSI_PROJECT.Models
         public string mttf { get; set; }
         public string mttr { get; set; }
         public string overdue { get; set; }
+        public string created_date { get; set; }
     }
 }

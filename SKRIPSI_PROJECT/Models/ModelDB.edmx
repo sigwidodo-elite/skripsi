@@ -171,7 +171,7 @@
           <Property Name="role" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'db_skripsi.dbo.V_Equipment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Equipment">
           <Key>
             <PropertyRef Name="m_equip_id" />
@@ -205,7 +205,7 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipment' does not have a primar
           <Property Name="wiring" Type="varchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'db_skripsi.dbo.V_Equipments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_Equipments">
           <Key>
             <PropertyRef Name="equipment_id" />
@@ -233,7 +233,8 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
           <Property Name="last_service" Type="varchar" MaxLength="20" />
           <Property Name="mttf" Type="varchar" MaxLength="50" />
           <Property Name="mttr" Type="varchar" MaxLength="50" />
-          <Property Name="overdue" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="overdue" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="created_date" Type="varchar" MaxLength="20" />
         </EntityType>
         <Function Name="sp_insert_repairment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="repair_id" Type="int" Mode="In" />
@@ -311,7 +312,8 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
     [V_Equipments].[last_service] AS [last_service], 
     [V_Equipments].[mttf] AS [mttf], 
     [V_Equipments].[mttr] AS [mttr], 
-    [V_Equipments].[overdue] AS [overdue]
+    [V_Equipments].[overdue] AS [overdue], 
+    [V_Equipments].[created_date] AS [created_date]
     FROM [dbo].[V_Equipments] AS [V_Equipments]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -367,7 +369,6 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
           <EntitySet Name="m_material" EntityType="DB_SKRIPSIModel.m_material" />
           <EntitySet Name="tn_m_equipment" EntityType="DB_SKRIPSIModel.tn_m_equipment" />
           <EntitySet Name="m_equipment" EntityType="DB_SKRIPSIModel.m_equipment" />
-          <EntitySet Name="V_Equipments" EntityType="DB_SKRIPSIModel.V_Equipments" />
           <FunctionImport Name="sp_insert_repairment">
             <Parameter Name="repair_id" Mode="In" Type="Int32" />
             <Parameter Name="equipment_id" Mode="In" Type="Int32" />
@@ -376,6 +377,7 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
             <Parameter Name="created_by" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="equipment_repairment" EntityType="DB_SKRIPSIModel.equipment_repairment" />
+          <EntitySet Name="V_Equipments" EntityType="DB_SKRIPSIModel.V_Equipments" />
           </EntityContainer>
         <EntityType Name="tn_m_dropdown">
           <Key>
@@ -524,6 +526,22 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
           <Property Name="created_by" Type="Int32" />
           <Property Name="created_date" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="equipment_repairment">
+          <Key>
+            <PropertyRef Name="equip_history_id" />
+          </Key>
+          <Property Name="equip_history_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="equipment_id" Type="Int32" />
+          <Property Name="start_date" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="end_date" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="operation_time" Type="Int32" />
+          <Property Name="duration" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="Int32" />
+          <Property Name="created_date" Type="DateTime" Precision="3" />
+          <Property Name="updated_by" Type="Int32" />
+          <Property Name="updated_date" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="V_Equipments">
           <Key>
             <PropertyRef Name="equipment_id" />
@@ -551,23 +569,8 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
           <Property Name="last_service" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="mttf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="mttr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="overdue" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="equipment_repairment">
-          <Key>
-            <PropertyRef Name="equip_history_id" />
-          </Key>
-          <Property Name="equip_history_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="equipment_id" Type="Int32" />
-          <Property Name="start_date" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="end_date" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="operation_time" Type="Int32" />
-          <Property Name="duration" Type="Int32" />
-          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="created_by" Type="Int32" />
-          <Property Name="created_date" Type="DateTime" Precision="3" />
-          <Property Name="updated_by" Type="Int32" />
-          <Property Name="updated_date" Type="DateTime" Precision="3" />
+          <Property Name="overdue" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="created_date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -769,9 +772,28 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_insert_repairment" FunctionName="DB_SKRIPSIModel.Store.sp_insert_repairment" />
+          <EntitySetMapping Name="equipment_repairment">
+            <EntityTypeMapping TypeName="DB_SKRIPSIModel.equipment_repairment">
+              <MappingFragment StoreEntitySet="equipment_repairment">
+                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="operation_time" ColumnName="operation_time" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="equip_history_id" ColumnName="equip_history_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="V_Equipments">
             <EntityTypeMapping TypeName="DB_SKRIPSIModel.V_Equipments">
               <MappingFragment StoreEntitySet="V_Equipments">
+                <ScalarProperty Name="created_date" ColumnName="created_date" />
                 <ScalarProperty Name="overdue" ColumnName="overdue" />
                 <ScalarProperty Name="mttr" ColumnName="mttr" />
                 <ScalarProperty Name="mttf" ColumnName="mttf" />
@@ -795,24 +817,6 @@ warning 6002: The table/view 'DB_SKRIPSI.dbo.V_Equipments' does not have a prima
                 <ScalarProperty Name="area_id" ColumnName="area_id" />
                 <ScalarProperty Name="tag_no" ColumnName="tag_no" />
                 <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_insert_repairment" FunctionName="DB_SKRIPSIModel.Store.sp_insert_repairment" />
-          <EntitySetMapping Name="equipment_repairment">
-            <EntityTypeMapping TypeName="DB_SKRIPSIModel.equipment_repairment">
-              <MappingFragment StoreEntitySet="equipment_repairment">
-                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
-                <ScalarProperty Name="updated_by" ColumnName="updated_by" />
-                <ScalarProperty Name="created_date" ColumnName="created_date" />
-                <ScalarProperty Name="created_by" ColumnName="created_by" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="duration" ColumnName="duration" />
-                <ScalarProperty Name="operation_time" ColumnName="operation_time" />
-                <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="start_date" ColumnName="start_date" />
-                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
-                <ScalarProperty Name="equip_history_id" ColumnName="equip_history_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

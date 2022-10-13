@@ -20,9 +20,9 @@ namespace SKRIPSI_PROJECT.Controllers
             {
                 return RedirectToAction("signout", "Home");
             }
-
-            tn_u_login user = (tn_u_login)Session["sessionUser"];
-            return View(path + "master_area.cshtml", user);
+            Helper helper = new Helper();
+            helper.user = (tn_u_login)Session["sessionUser"];
+            return View(path + "master_area.cshtml", helper);
         }
 
         [HttpGet]
@@ -108,8 +108,9 @@ namespace SKRIPSI_PROJECT.Controllers
                 return RedirectToAction("signout", "Home");
             }
 
-            tn_u_login user = (tn_u_login)Session["sessionUser"];
-            return View(path + "master_manufacture.cshtml", user);
+            Helper helper = new Helper();
+            helper.user = (tn_u_login)Session["sessionUser"];
+            return View(path + "master_manufacture.cshtml", helper);
         }
 
         [HttpGet]
@@ -195,8 +196,9 @@ namespace SKRIPSI_PROJECT.Controllers
                 return RedirectToAction("signout", "Home");
             }
 
-            tn_u_login user = (tn_u_login)Session["sessionUser"];
-            return View(path + "master_material.cshtml", user);
+            Helper helper = new Helper();
+            helper.user = (tn_u_login)Session["sessionUser"];
+            return View(path + "master_material.cshtml", helper);
         }
 
         [HttpGet]

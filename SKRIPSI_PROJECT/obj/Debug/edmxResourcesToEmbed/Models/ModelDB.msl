@@ -195,9 +195,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_insert_repairment" FunctionName="DB_SKRIPSIModel.Store.sp_insert_repairment" />
+    <EntitySetMapping Name="equipment_repairment">
+      <EntityTypeMapping TypeName="DB_SKRIPSIModel.equipment_repairment">
+        <MappingFragment StoreEntitySet="equipment_repairment">
+          <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="duration" ColumnName="duration" />
+          <ScalarProperty Name="operation_time" ColumnName="operation_time" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+          <ScalarProperty Name="equip_history_id" ColumnName="equip_history_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="V_Equipments">
       <EntityTypeMapping TypeName="DB_SKRIPSIModel.V_Equipments">
         <MappingFragment StoreEntitySet="V_Equipments">
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
           <ScalarProperty Name="overdue" ColumnName="overdue" />
           <ScalarProperty Name="mttr" ColumnName="mttr" />
           <ScalarProperty Name="mttf" ColumnName="mttf" />
@@ -221,24 +240,6 @@
           <ScalarProperty Name="area_id" ColumnName="area_id" />
           <ScalarProperty Name="tag_no" ColumnName="tag_no" />
           <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_insert_repairment" FunctionName="DB_SKRIPSIModel.Store.sp_insert_repairment" />
-    <EntitySetMapping Name="equipment_repairment">
-      <EntityTypeMapping TypeName="DB_SKRIPSIModel.equipment_repairment">
-        <MappingFragment StoreEntitySet="equipment_repairment">
-          <ScalarProperty Name="updated_date" ColumnName="updated_date" />
-          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
-          <ScalarProperty Name="created_date" ColumnName="created_date" />
-          <ScalarProperty Name="created_by" ColumnName="created_by" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="duration" ColumnName="duration" />
-          <ScalarProperty Name="operation_time" ColumnName="operation_time" />
-          <ScalarProperty Name="end_date" ColumnName="end_date" />
-          <ScalarProperty Name="start_date" ColumnName="start_date" />
-          <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
-          <ScalarProperty Name="equip_history_id" ColumnName="equip_history_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

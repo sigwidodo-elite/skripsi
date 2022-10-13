@@ -45,6 +45,7 @@
                                         <th rowspan="2"> OVERDUE </th>
                                         <th rowspan="2"> LAST SERVICE </th>
                                         <th rowspan="2" width="10%"> ACTION</th>
+                                        <th rowspan="2" style="display:none;"> id </th>
                                     </tr>
                                     <tr class="bg-red-thunderbird bg-font-red-thunderbird">
                                         <th> MANUFACTURE </th>
@@ -325,6 +326,7 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" id="txtequipid" class="form-control" />
+                <input type="hidden" id="txtinputdate" class="form-control" />
                 <div class="row" style="margin-bottom: -5px;">
                     <div class="form-group">
                         <label class="control-label col-md-2">Tag No.</label>
@@ -332,7 +334,7 @@
                             <label class="control-label col-md-2" id="label-tagno"></label>
                         </div>
                         <label class="control-label col-md-1">Area</label>
-                        <div class="col-md-2" style="padding-right: 40px; !important;" >
+                        <div class="col-md-2" style="padding-right: 40px; !important;">
                             <label class="control-label col-md-2" id="label-area"></label>
                         </div>
                     </div>
@@ -356,15 +358,15 @@
                     <div class="form-group">
                         <label class="control-label col-md-2">MTTR</label>
                         <div class="col-md-2" style="padding-right: 40px; !important;">
-                            <input type="text" id="txtMttr" maxlength="100" name="area" class="form-control" disabled/>
+                            <input type="text" id="txtMttr" maxlength="100" name="area" class="form-control" disabled />
                         </div>
                         <label class="control-label col-md-1">MTBF</label>
                         <div class="col-md-2" style="padding-right: 40px; !important;">
-                            <input type="text" id="txtMttf" maxlength="100" name="area" class="form-control" disabled/>
+                            <input type="text" id="txtMttf" maxlength="100" name="area" class="form-control" disabled />
                         </div>
                         <label class="control-label col-md-1">Overdue</label>
                         <div class="col-md-2" style="padding-right: 40px; !important;">
-                            <input type="text" id="txtOverdue" maxlength="100" name="area" class="form-control" disabled/>
+                            <input type="text" id="txtOverdue" maxlength="100" name="area" class="form-control" disabled />
                         </div>
                     </div>
                 </div>
@@ -446,7 +448,6 @@
         $('#master-menu').addClass('active ');
         $('#master-equipment-menu').addClass('active');
 
-
         /* INIT TABLE MASTER equipment */
         function initData() {
 
@@ -495,6 +496,7 @@
                                 '<a class="btn bg-red-thunderbird bg-font-red-thunderbird detail-status-equipment" href="javascript:;">DETAIL</a>';
                         }
                     },
+                    { "mDataProp": "created_date", "visible": false, "searchable": true, "targets": [0] },
                 ]
             });
 
@@ -553,6 +555,8 @@
 
         });
 
+       
+
         /* BTN MODAL MASTER equipment */
         $(document).on('click', '.btn-finish-equipment', function (e) {
             var oTable = $('#table_history').dataTable();
@@ -597,12 +601,14 @@
             var mttr = oTable.fnGetData($(this).parent().parent(), 12);
             var mttf = oTable.fnGetData($(this).parent().parent(), 13);
             var overdue = oTable.fnGetData($(this).parent().parent(), 14);
+            var createdDate = oTable.fnGetData($(this).parent().parent(), 18);
             $('#label-tagno').text(tagNo);
             $('#label-area').text(area);
             $('#txtMttr').val(mttr);
             $('#txtMttf').val(mttf);
             $('#txtOverdue').val(overdue);
             $('#txtequipid').val(id);
+            $('#txtinputdate').val(createdDate);
             initRepairment();
             $('#form_repair_equipment').modal('show');
         });
@@ -954,8 +960,17 @@
 
         /* BTN SUBMIT MASTER equipment */
         $(document).on("click", "#btn-add-repairment", function (e) {
+            var dateFrom = $('#txtinputdate').val();
+            var dateTo = $('#txtRepairDate').val();
+            var d1 = dateFrom.split("-");
+            var d2 = dateTo.split("-");
 
-            if ($('#txtRepairDate').val() == '') {
+            var from = new Date(d1[2], parseInt(d1[1]) - 1, d1[0]);  // -1 because months are from 0 to 11
+            var to = new Date(d2[2], parseInt(d2[1]) - 1, d2[0]);
+            if (from > to) {
+                swal("Tanggal mulai perbaikan tidak boleh kurang dari tanggal " + dateFrom);
+            }
+            else if ($('#txtRepairDate').val() == '') {
                 swal("Tanggal mulai perbaikan tidak boleh kosong");
             } else {
                 confirmSaveequipmentRepair();

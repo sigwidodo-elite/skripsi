@@ -22,8 +22,9 @@ namespace SKRIPSI_PROJECT.Controllers
                 return RedirectToAction("signout", "Home");
             }
 
-            tn_u_login user = (tn_u_login)Session["sessionUser"];
-            return View(path + "master_user.cshtml", user);
+            Helper helper = new Helper();
+            helper.user = (tn_u_login)Session["sessionUser"];
+            return View(path + "master_user.cshtml", helper);
         }
 
         [HttpGet]

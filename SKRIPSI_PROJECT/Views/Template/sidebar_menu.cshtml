@@ -1,4 +1,4 @@
-﻿
+﻿@model SKRIPSI_PROJECT.Models.Helper
 
 <!-- BEGIN SIDEBAR -->
 <div class="page-sidebar-wrapper">
@@ -22,14 +22,15 @@
             <!-- END SIDEBAR USERPIC -->
             <!-- SIDEBAR USER TITLE -->
             <div class="profile-usertitle">
-                <div class="profile-usertitle-name"> </div>
-                <div class="profile-usertitle-job" style="font-size:10px;"> </div>
+                <div class="profile-usertitle-name">@Model.user.u_name </div>
+                <div class="profile-usertitle-job" style="font-size:10px;"> @Model.user.u_role</div>
             </div>
             <!-- END SIDEBAR USER TITLE -->
         </div>
         <hr />
         <!-- END PORTLET MAIN -->
         <ul class="page-sidebar-menu " id="menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            @if (Model.user.u_role.Equals("ADMIN")) { 
             <li class="nav-item start" id="employee-menu">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <span class="title font-dark">Data Pengguna</span>
@@ -45,6 +46,8 @@
                     </li>
                 </ul>
             </li>
+            }
+            
             <li class="nav-item start" id="employee-menu">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <span class="title font-dark">Data Peralatan</span>
